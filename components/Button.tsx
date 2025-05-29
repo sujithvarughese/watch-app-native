@@ -1,9 +1,9 @@
 import {StyleSheet, Text, TouchableOpacity} from "react-native";
 import React from "react";
 import {ThemedText} from "@/components/ThemedText";
-import { ButtonProps } from "react-native";
+import { TouchableOpacityProps } from "react-native";
 
-type Props = ButtonProps & {
+type Props = TouchableOpacityProps & {
   children: React.ReactNode;
   onPress: () => void;
 }

@@ -1,62 +1,109 @@
-import { BarChart } from '@mantine/charts';
-import {Box, Text} from "@mantine/core";
-import type { WatchDetails } from "@/app/page";
+import {View, Text, StyleSheet, ScrollView, Pressable} from 'react-native';
+import {useAppSelector} from "@/store/hooks";
 
 
+const Results = () => {
 
-const Results = ({ watchDetails }: {watchDetails: WatchDetails | null}) => {
-
+  const watchDetails = useAppSelector(state => state.global.watchDetails)
   const { name, details, results } = watchDetails || { name: '', details: '', results: []}
 
   console.log(watchDetails)
   return (
-    <Box maw={900} mx="auto" p={40} mt={20}>
-    <Text size="xl" mb={10}>{name}</Text>
-      <Text size="sm" mb={10}>{details}</Text>
-      {results?.length > 0 &&
-      <BarChart
-        h={400}
-        data={results}
-        type="default"
-        withBarValueLabel={true}
-        withTooltip={false}
-        dataKey="category"
-        orientation="vertical"
-        xAxisLabel="Rating"
-        xAxisProps={{domain: [0, 10]}}
-        barProps={{radius: 10 }}
-        series={[{name: 'rating', color: 'blue.6'}]}
-        getBarColor={(value) => getColor(value)}
-      />
-      }
-      {results?.map(result =>
-        <Box
-          key={result.category}
-          p="md"
-          mb="md"
-          bg="gray.0"
-          style={{
-            borderRadius: 8,
-            transition: 'transform 0.2s',
-            '&:hover': {transform: 'translateY(-2px)'}
-          }}
-        >
-          <Text fw={700} mb={8}>{result.category} - {result.rating} / 10</Text>
-          <Text size="sm" c="gray.7">{result.comments}</Text>
-        </Box>
+    <ScrollView style={styles.container}>
+      <Text style={styles.title}>{name}</Text>
+      <Text style={styles.details}>{details}</Text>
+      {results?.length > 0 && (
+        <View style={styles.chartContainer}>
+          {results.map(result => (
+            <View key={result.category} style={styles.barContainer}>
+              <Text style={styles.barLabel}>{result.category}</Text>
+              <View style={styles.barWrapper}>
+                <View
+                  style={[styles.bar, {width: `${result.rating * 10}%`, backgroundColor: getColor(result.rating)}]}/>
+                <Text style={styles.barValue}>{result.rating}</Text>
+              </View>
+            </View>
+          ))}
+        </View>
       )}
-    </Box>
+      {results?.map(result =>
+        <Pressable
+          key={result.category}
+          style={({pressed}) => [
+            styles.resultCard,
+            pressed && styles.cardPressed
+          ]}
+        >
+          <Text style={styles.cardTitle}>{result.category} - {result.rating} / 10</Text>
+          <Text style={styles.cardComment}>{result.comments}</Text>
+        </Pressable>
+      )}
+    </ScrollView>
   );
 };
 
 const getColor = (rating: number) => {
   if (rating >= 8) {
-    return 'green.6';
+    return '#2E7D32';
   }
   if (rating >= 6) {
-    return 'yellow.5';
+    return '#F9A825';
   }
-  return 'red.6';
+  return '#C62828';
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 10,
+    fontWeight: 'bold',
+  },
+  details: {
+    fontSize: 14,
+    marginBottom: 10,
+  },
+  chartContainer: {
+    marginVertical: 20,
+  },
+  barContainer: {
+    marginBottom: 15,
+  },
+  barLabel: {
+    marginBottom: 5,
+  },
+  barWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: 25,
+  },
+  bar: {
+    height: '100%',
+    borderRadius: 5,
+  },
+  barValue: {
+    marginLeft: 8,
+  },
+  resultCard: {
+    padding: 16,
+    marginBottom: 16,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 8,
+  },
+  cardPressed: {
+    transform: [{scale: 0.98}],
+  },
+  cardTitle: {
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  cardComment: {
+    fontSize: 14,
+    color: '#666',
+  },
+});
 
 export default Results;
