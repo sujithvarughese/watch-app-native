@@ -34,7 +34,6 @@ const globalSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(setImages.fulfilled, (state, action) => {
-      console.log(action.payload)
       state.images = [...state.images, action.payload as string]
       state.loading = false
     })
@@ -46,7 +45,6 @@ const globalSlice = createSlice({
       state.loading = true
     })
     builder.addCase(fetchWatchDetails.fulfilled, (state, action) => {
-      //console.log(action.payload)
       state.watchDetails = action.payload
       state.loading = false
     })
@@ -83,9 +81,11 @@ const resizeFile = (file: File) => {
   });
 };
 
-export const fetchWatchDetails = createAsyncThunk('global/fetchWatchDetails', async (payload: { payload: string }, { getState }) => {
+export const fetchWatchDetails = createAsyncThunk('global/fetchWatchDetails', async (payload: string[], { getState }) => {
+  const formattedData = payload?.map(image => {
+    return { type: "image_url", image_url: { url: image } }
+  })
   try {
-    console.log(payload)
     const res = await openai.post("", {
       model: "gpt-4.1-mini",
       response_format: { type: "json_object" },
@@ -98,12 +98,11 @@ export const fetchWatchDetails = createAsyncThunk('global/fetchWatchDetails', as
           role: "user",
           content: [
             { type: "text", text: "Is this watch authentic?" },
-            { type: "image_url", image_url: { url: payload } }
+            ...formattedData
           ],
         },
       ],
     });
-    console.log(res)
     return JSON.parse(res?.data?.choices[0].message.content);
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error));
