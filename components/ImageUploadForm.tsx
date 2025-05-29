@@ -11,13 +11,13 @@ const PlaceholderImage = require('@/assets/images/icon.png');
 export default function ImageUploadForm() {
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const dispatch = useAppDispatch();
+
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
-      allowsEditing: true,
       quality: 1,
+      allowsMultipleSelection: true,
     });
-
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
     } else {
