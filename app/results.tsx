@@ -16,27 +16,16 @@ const ResultsScreen = () => {
         <View style={styles.chartContainer}>
           {results.map(result => (
             <View key={result.category} style={styles.barContainer}>
-              <Text style={styles.barLabel}>{result.category}</Text>
-              <View style={styles.barWrapper}>
+              <Text style={styles.cardTitle}>{result.category} - {result.rating} / 10</Text>              <View style={styles.barWrapper}>
                 <View
                   style={[styles.bar, {width: `${result.rating * 10}%`, backgroundColor: getColor(result.rating)}]}/>
-                <Text style={styles.barValue}>{result.rating}</Text>
+              </View>
+              <View key={result.category}>
+                <Text style={styles.cardComment}>{result.comments}</Text>
               </View>
             </View>
           ))}
         </View>
-      )}
-      {results?.map(result =>
-        <Pressable
-          key={result.category}
-          style={({pressed}) => [
-            styles.resultCard,
-            pressed && styles.cardPressed
-          ]}
-        >
-          <Text style={styles.cardTitle}>{result.category} - {result.rating} / 10</Text>
-          <Text style={styles.cardComment}>{result.comments}</Text>
-        </Pressable>
       )}
     </ScrollView>
   );
