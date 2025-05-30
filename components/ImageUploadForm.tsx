@@ -1,17 +1,21 @@
-import { View, StyleSheet } from 'react-native';
+import {View, StyleSheet, ActivityIndicator} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import Button from '@/components/Button';
 import ImageViewer from '@/components/ImageViewer';
-import {useAppDispatch} from "@/store/hooks";
+import {useAppDispatch, useAppSelector} from "@/store/hooks";
 import {fetchWatchDetails} from "@/store/globalSlice";
 import {router} from "expo-router";
+import IconButton from "@/components/IconButton";
+import CircleButton from "@/components/CircleButton";
+import {Image} from "expo-image";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
 export default function ImageUploadForm() {
-  const [selectedImages, setSelectedImages] = useState<string[] | undefined>(undefined);
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const dispatch = useAppDispatch();
+  const loading = useAppSelector(state => state.global.loading)
 
   const pickImageAsync = async () => {
     if (selectedImages?.length >= 6) {
@@ -35,19 +39,31 @@ export default function ImageUploadForm() {
   };
 
   const handleSubmit = async () => {
-    console.log(selectedImages)
     await dispatch(fetchWatchDetails(selectedImages))
     router.navigate('/results')
   }
 
+  const handleReset = () => {
+    setSelectedImages([])
+  }
+
   return (
     <View style={styles.container}>
+
+
+
+
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={PlaceholderImage} selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
       </View>
-      <View style={styles.footerContainer}>
-        <Button onPress={pickImageAsync}>Choose a Photo</Button>
-        <Button onPress={handleSubmit}>Use this photo</Button>
+
+
+      <View style={styles.optionsContainer}>
+        <View style={styles.optionsRow}>
+          <IconButton icon="refresh" label="Reset" onPress={handleReset} />
+          <CircleButton onPress={pickImageAsync} />
+          {loading ? <ActivityIndicator size="large" /> : <IconButton icon="image-search" label="Submit" onPress={handleSubmit} />}
+        </View>
       </View>
     </View>
   );
@@ -56,11 +72,20 @@ export default function ImageUploadForm() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#25292e',
     alignItems: 'center',
   },
   imageContainer: {
-    flex: 1,
+
+  },
+
+  optionsContainer: {
+    position: 'absolute',
+    bottom: 40,
+  },
+  optionsRow: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
   },
   footerContainer: {
     flex: 1 / 3,

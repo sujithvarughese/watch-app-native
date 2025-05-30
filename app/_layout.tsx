@@ -6,20 +6,18 @@ import {store} from "@/store/store";
 
 export default function RootLayout() {
 
+  let colorScheme = useColorScheme()
 
   return (
-    <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1 }}>
-        <Provider store={store}>
-          <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false, title: "" }} />
-            <Stack.Screen name="results" options={{ title: "" }} />
-            <Stack.Screen name="about" options={{ title: "" }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-        </Provider>
-      </SafeAreaView>
-    </SafeAreaProvider>
+
+      <Provider store={store}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "" }} />
+          <Stack.Screen name="results" options={{ title: "" }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+      </Provider>
+
 
   );
 }

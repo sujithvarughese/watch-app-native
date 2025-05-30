@@ -8,15 +8,14 @@ export default function AboutScreen() {
   return (
     <>
       <Stack.Screen options={{title: 'About Authentime'}}/>
+      <Image source={require('../../assets/images/banner.jpeg')} style={styles.imageContainer} />
+
       <ScrollView>
         <ThemedView style={styles.container}>
           <Image
-            source={require('../assets/images/icon.png')}
+            source={require('../../assets/images/logo2.png')}
             style={styles.logo}
           />
-          <ThemedText type="title" style={styles.title}>
-            Authentime
-          </ThemedText>
           <ThemedText style={styles.description}>
             Welcome to Authentime, your trusted companion in watch authentication.
             Our advanced AI technology helps you verify the authenticity of luxury
@@ -30,6 +29,28 @@ export default function AboutScreen() {
             • Detailed authenticity reports{'\n'}
             • High-resolution image processing{'\n'}
             • Expert-level accuracy
+          </ThemedText>
+          <ThemedText type="subtitle" style={styles.sectionTitle}>
+            Privacy Policy
+          </ThemedText>
+          <ThemedText style={styles.legalText}>
+            We collect and process images solely for watch authentication purposes. Your data is encrypted and securely
+            stored. We do not share your personal information with third parties. For more details, please read our full
+            Privacy Policy.
+          </ThemedText>
+          <ThemedText type="subtitle" style={styles.sectionTitle}>
+            Terms and Conditions
+          </ThemedText>
+          <ThemedText style={styles.legalText}>
+            By using Authentime, you agree to our terms of service. This application is strictly for reference and
+            entertainment purposes only and is NOT a substitute for professional watch authentication services.
+            Authentication results are provided as-is without warranty or guarantee of accuracy. The app's analysis
+            should not be used as the sole basis for making purchasing decisions or determining authenticity. We
+            strongly recommend consulting certified watch experts and obtaining proper documentation for definitive
+            authentication. We reserve the right to modify or discontinue services at any time. Users acknowledge that
+            they rely on the app's results at their own risk, and we are not liable for any losses or damages resulting
+            from decisions made based on the app's authentication results. For complete details, please review our Terms
+            of Service.
           </ThemedText>
           <View style={styles.footer}>
             <ThemedText style={styles.version}>Version 1.0.0</ThemedText>
@@ -49,8 +70,13 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
   },
+  imageContainer: {
+    height: 100,
+    width: "100%",
+    zIndex: 100,
+  },
   logo: {
-    width: 120,
+    width: "100%",
     height: 120,
     marginBottom: 20,
   },
@@ -75,6 +101,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 24,
     marginBottom: 24,
+  },
+  legalText: {
+    fontSize: 14,
+    textAlign: 'justify',
+    marginBottom: 24,
+    lineHeight: 20,
   },
   footer: {
     marginTop: 32,

@@ -14,16 +14,26 @@ export type WatchDetails = {
   results: Category[]
 }
 
+export type ModelDetails = {
+  name: string,
+  details: string,
+  link: string,
+  productionYear: string,
+  reference: string
+}
+
 export type Props = {
   loading: boolean,
   images: string[],
   watchDetails: WatchDetails | null,
+  modelDetails: ModelDetails | null,
 };
 
 const initialState: Props = {
   loading: false,
   images: [],
-  watchDetails: null
+  watchDetails: null,
+  modelDetails: null,
 }
 
 const globalSlice = createSlice({
@@ -33,17 +43,6 @@ const globalSlice = createSlice({
 
   },
   extraReducers: builder => {
-    builder.addCase(setImages.fulfilled, (state, action) => {
-      state.images = [...state.images, action.payload as string]
-      state.loading = false
-    })
-    builder.addCase(setImages.rejected, (state, action) => {
-      state.loading = false
-      console.log("Failed to fetch response")
-    })
-    builder.addCase(setImages.pending, (state, action) => {
-      state.loading = true
-    })
     builder.addCase(fetchWatchDetails.fulfilled, (state, action) => {
       state.watchDetails = action.payload
       state.loading = false
@@ -53,6 +52,17 @@ const globalSlice = createSlice({
       console.log("Failed to fetch response")
     })
     builder.addCase(fetchWatchDetails.pending, (state, action) => {
+      state.loading = true
+    })
+    builder.addCase(fetchModelDetails.fulfilled, (state, action) => {
+      state.modelDetails = action.payload
+      state.loading = false
+    })
+    builder.addCase(fetchModelDetails.rejected, (state, action) => {
+      state.loading = false
+      console.log("Failed to fetch response")
+    })
+    builder.addCase(fetchModelDetails.pending, (state, action) => {
       state.loading = true
     })
   }
@@ -99,6 +109,30 @@ export const fetchWatchDetails = createAsyncThunk('global/fetchWatchDetails', as
           content: [
             { type: "text", text: "Is this watch authentic?" },
             ...formattedData
+          ],
+        },
+      ],
+    });
+    return JSON.parse(res?.data?.choices[0].message.content);
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : String(error));
+  }
+});
+
+export const fetchModelDetails = createAsyncThunk('global/fetchModelDetails', async (payload: string, { getState }) => {
+  try {
+    const res = await openai.post("", {
+      model: "gpt-4.1-mini",
+      response_format: { type: "json_object" },
+      messages: [
+        {
+          role: "system",
+          content: process.env.EXPO_PUBLIC_MODEL_DETAIL_INSTRUCTIONS,
+        },
+        {
+          role: "user",
+          content: [
+            { type: "text", text: payload },
           ],
         },
       ],
