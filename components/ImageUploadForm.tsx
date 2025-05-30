@@ -1,4 +1,4 @@
-import {View, StyleSheet, ActivityIndicator} from 'react-native';
+import {View, StyleSheet, ActivityIndicator, Text} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import Button from '@/components/Button';
@@ -9,6 +9,8 @@ import {router} from "expo-router";
 import IconButton from "@/components/IconButton";
 import CircleButton from "@/components/CircleButton";
 import {Image} from "expo-image";
+import {ThemedText} from "@/components/ThemedText";
+import Loading from "@/components/Loading";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
@@ -49,22 +51,37 @@ export default function ImageUploadForm() {
 
   return (
     <View style={styles.container}>
+      {!selectedImages?.length &&
+        <View style={styles.instructionsContainer}>
 
-
-
+          <ThemedText style={styles.instructionsHeader}>Upload Instructions:</ThemedText>
+          <ThemedText style={styles.instructions}>
+            • Upload clear, well-lit images of your watch{'\n'}
+            • Make sure the watch is clean and not obscured by any objects{'\n'}
+            • Include detailed images of:{'\n'}
+            {'  '}- Dial{'\n'}
+            {'  '}- Crown{'\n'}
+            {'  '}- Case{'\n'}
+            {'  '}- Bezel{'\n'}
+            {'  '}- Band or Bracelet{'\n'}
+            {'  '}- Clasp or Buckle{'\n'}
+            {'  '}- Caseback{'\n'}
+            {'  '}- Side Case Profile
+          </ThemedText>
+        </View>
+      }
 
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={PlaceholderImage} selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
       </View>
-
-
       <View style={styles.optionsContainer}>
         <View style={styles.optionsRow}>
-          <IconButton icon="refresh" label="Reset" onPress={handleReset} />
-          <CircleButton onPress={pickImageAsync} />
-          {loading ? <ActivityIndicator size="large" /> : <IconButton icon="image-search" label="Submit" onPress={handleSubmit} />}
+          {!loading && !!selectedImages.length && <IconButton icon="refresh" label="Reset" onPress={handleReset} />}
+          {!loading && <CircleButton onPress={pickImageAsync} />}
+          {!loading && !!selectedImages.length && <IconButton icon="image-search" label="Submit" onPress={handleSubmit} />}
         </View>
       </View>
+      {loading && <View style={styles.loadingContainer}><Loading /></View>}
     </View>
   );
 }
@@ -74,21 +91,42 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  instructionsContainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: 12,
+    padding: 16,
+    marginHorizontal: 20,
+    marginVertical: 16,
+    width: '90%',
+  },
+  instructionsHeader: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 12,
+    color: '#fff',
+  },
+  instructions: {
+    color: '#fff',
+    textAlign: 'left',
+    lineHeight: 24,
+    fontSize: 14,
+  },
   imageContainer: {
 
   },
 
   optionsContainer: {
     position: 'absolute',
-    bottom: 40,
+    bottom: 30,
+
   },
   optionsRow: {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
   },
-  footerContainer: {
-    flex: 1 / 3,
-    alignItems: 'center',
+  loadingContainer: {
+    position: 'absolute',
+    bottom: 10,
   },
 });

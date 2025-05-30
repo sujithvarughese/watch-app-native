@@ -16,9 +16,10 @@ const TabLayout = () => {
         headerStyle: { backgroundColor: "#25292e"},
         tabBarStyle: {
           backgroundColor: colorScheme === 'dark' ? "black" : "white",
-          height: 60,
+          height: 70,
           elevation: 10,
           shadowColor: '#000',
+          paddingTop: 6,
           shadowOffset: {
             width: 0,
             height: -2,
@@ -35,7 +36,7 @@ const TabLayout = () => {
         options={{
           title: '',
           tabBarIcon: ({ color, focused}) => (
-            <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={24} />
+            <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={28} />
           )
       }}
       />
@@ -44,7 +45,7 @@ const TabLayout = () => {
         options={{
           title: '',
           tabBarIcon: ({ color, focused}) => (
-            <MaterialIcons name="library-books" size={24} color={color} />
+            <MaterialIcons name="library-books" size={28} color={color} />
           )
         }}
       />
@@ -53,7 +54,7 @@ const TabLayout = () => {
         options={{
           title: '',
           tabBarIcon: ({ color, focused}) => (
-            <Entypo name="info-with-circle" size={24} color={color} />
+            <Entypo name="info-with-circle" size={28} color={color} />
           )
       }}
       />

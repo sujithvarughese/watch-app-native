@@ -7,7 +7,6 @@ const ResultsScreen = () => {
 
   const watchDetails = useAppSelector(state => state.global.watchDetails)
   const { name, details, results } = watchDetails || { name: '', details: '', results: []}
-  console.log(watchDetails)
 
   return (
     <ScrollView style={styles.container}>

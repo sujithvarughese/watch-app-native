@@ -53,7 +53,7 @@ export default function AboutScreen() {
             of Service.
           </ThemedText>
           <View style={styles.footer}>
-            <ThemedText style={styles.version}>Version 1.0.0</ThemedText>
+            <ThemedText style={styles.version}>Version 1.0.1</ThemedText>
             <ThemedText style={styles.copyright}>
               © 2024 Authentime. All rights reserved.
             </ThemedText>

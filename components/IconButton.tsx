@@ -1,8 +1,8 @@
-import {Pressable, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {Pressable, StyleSheet, Text, TouchableOpacity, TouchableOpacityProps} from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import {ThemedText} from "@/components/ThemedText";
 
-type Props = {
+type Props = TouchableOpacityProps & {
   icon: keyof typeof MaterialIcons.glyphMap;
   label: string;
   onPress: () => void;

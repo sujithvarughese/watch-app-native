@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     opacity: 0.8,
     width: "100%",
-    top: 300,
+    top: 500,
     padding: 36,
 
   },

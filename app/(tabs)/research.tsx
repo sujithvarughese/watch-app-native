@@ -39,7 +39,7 @@ export default function ResearchScreen() {
         />
         {loading
           ?
-          <ActivityIndicator size="large" color="#0000ff"/>
+          <ActivityIndicator size="large" style={{ width: 80 }} />
           :
           <TouchableOpacity style={styles.button} onPress={handleSearch}>
             <Text style={styles.buttonText}>Search</Text>
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    width: 80
   },
   buttonText: {
     color: 'white',
@@ -133,7 +134,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   details: {
-    fontSize: 18,
     color: 'rgba(255, 255, 255, 0.9)',
     marginBottom: 20,
     lineHeight: 24,
@@ -144,25 +144,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 10,
     zIndex: 100,
-  },
-  categoryContainer: {
-    marginBottom: 15,
-    padding: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 5,
-  },
-  category: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  rating: {
-    fontSize: 16,
-    color: '#007AFF',
-    marginVertical: 5,
-  },
-  comments: {
-    fontSize: 14,
-    color: 'white',
   },
 });
