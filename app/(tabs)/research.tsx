@@ -52,7 +52,7 @@ export default function ResearchScreen() {
         <View style={styles.resultsContainer}>
           <Text style={styles.title}>{modelDetails.name}</Text>
           {modelDetails.reference && <ThemedText style={styles.details}>Reference: {modelDetails.reference}</ThemedText>}
-          <ThemedText>{modelDetails.price}</ThemedText>
+          <ThemedText style={styles.details}>{modelDetails.price}</ThemedText>
           <ThemedText style={styles.details}>{modelDetails.productionYear}</ThemedText>
           <ThemedText style={styles.details}>{modelDetails.details}</ThemedText>
           <TouchableOpacity onPress={() => Linking.openURL(modelDetails.link)}>
