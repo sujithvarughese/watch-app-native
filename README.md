@@ -1,50 +1,63 @@
-# Welcome to your Expo app 👋
+# Watch Research App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Overview
 
-## Get started
+A sophisticated React Native application designed for watch enthusiasts and collectors. The app provides a comprehensive
+research platform for exploring detailed information about various watch models through an intuitive interface.
 
-1. Install dependencies
+## Architecture
 
-   ```bash
-   npm install
-   ```
+### Core Technologies
 
-2. Start the app
+- **Frontend Framework**: React Native with Expo
+- **State Management**: Redux with @reduxjs/toolkit
+- **Navigation**: Expo Router
+- **Styling**: React Native StyleSheet
+- **TypeScript**: For type safety and better development experience
 
-   ```bash
-   npx expo start
-   ```
+### Key Components
 
-In the output, you'll find options to open the app in a
+- `ResearchScreen`: Main search interface
+- `ThemedText`: Custom text component for consistent theming
+- `ModelDetails`: Type definition for watch information
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Technical Specifications
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### State Management
 
-## Get a fresh project
+- Redux implementation using `useDispatch` and `useAppSelector`
+- Global state slice managing:
+    - Loading states
+    - Model details
+    - Search queries
 
-When you're ready, run:
+### UI Components
 
-```bash
-npm run reset-project
-```
+1. **Search Interface**
+    - Responsive TextInput for query entry
+    - Loading indicator during API calls
+    - Styled button with touch feedback
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. **Results Display**
+    - Structured information layout
+    - Dynamic content rendering
+    - External link integration
+    - Themed text components
 
-## Learn more
+### Styling System
 
-To learn more about developing your project with Expo, look at the following resources:
+- Dark theme implementation
+- Consistent color scheme:
+    - Background: #25292e
+    - Accent: #007AFF
+    - Text: White
+- Responsive layouts using flexbox
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Development Setup
 
-## Join the community
+### Prerequisites
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- Node.js (LTS version)
+- npm or yarn
+- Expo CLI
+- iOS/Android development environment

@@ -19,7 +19,8 @@ export type ModelDetails = {
   details: string,
   link: string,
   productionYear: string,
-  reference: string
+  reference: string,
+  price: string
 }
 
 export type Props = {
