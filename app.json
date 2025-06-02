@@ -2,7 +2,7 @@
   "expo": {
     "name": "Authentime",
     "slug": "watch-app-native",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "watchappnative",
@@ -20,7 +20,8 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.sujithv.watchappnative"
     },
     "web": {
       "bundler": "metro",
@@ -29,6 +30,7 @@
     },
     "plugins": [
       "expo-router",
+      "expo-iap",
       [
         "expo-splash-screen",
         {

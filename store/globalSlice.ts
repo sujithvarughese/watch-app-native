@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import {openai} from "@/utilities/api";
-import Resizer from "react-image-file-resizer";
 
 export type Category = {
   category: string,
@@ -68,29 +67,6 @@ const globalSlice = createSlice({
     })
   }
 })
-
-export const setImages = createAsyncThunk('global/setImages', async (payload: File, { getState }) => {
-    const state = (getState() as { global: Props }).global
-    if (state.images.length >= 5) return;
-    return await resizeFile(payload)
-  }
-)
-const resizeFile = (file: File) => {
-  return new Promise<string>((resolve) => {
-    Resizer.imageFileResizer(
-      file,
-      300,
-      300,
-      "png",
-      100,
-      0,
-      (uri) => {
-        resolve(uri as string);
-      },
-      "png"
-    );
-  });
-};
 
 export const fetchWatchDetails = createAsyncThunk('global/fetchWatchDetails', async (payload: string[], { getState }) => {
   const formattedData = payload?.map(image => {
