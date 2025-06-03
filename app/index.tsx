@@ -13,7 +13,6 @@ const Index = () => {
     if (Object.entries(customerInfo.entitlements.active).length) {
       setValidated(true);
     }
-    console.log(customerInfo)
   }
 
   useEffect(() => {

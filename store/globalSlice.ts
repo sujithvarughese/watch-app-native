@@ -92,6 +92,7 @@ export const fetchWatchDetails = createAsyncThunk('global/fetchWatchDetails', as
     });
     return JSON.parse(res?.data?.choices[0].message.content);
   } catch (error) {
+    console.log(error)
     throw new Error(error instanceof Error ? error.message : String(error));
   }
 });

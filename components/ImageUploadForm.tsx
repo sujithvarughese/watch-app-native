@@ -14,6 +14,7 @@ import Loading from "@/components/Loading";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
+
 export default function ImageUploadForm() {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ export default function ImageUploadForm() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ['images'],
       quality: 0,
-      base64: true,
+      base64: true
     });
     if (!result.canceled) {
       const images = result.assets.map(image => "data:image/png;base64," + image.base64)

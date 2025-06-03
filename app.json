@@ -2,7 +2,7 @@
   "expo": {
     "name": "Authentime",
     "slug": "watch-app-native",
-    "version": "1.0.3",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "watchappnative",
@@ -13,12 +13,13 @@
       "bundleIdentifier": "com.sujithv.watchappnative",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
-      }
+      },
+      "backgroundColor": "#08253A"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#08253A"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.sujithv.watchappnative"
@@ -30,14 +31,13 @@
     },
     "plugins": [
       "expo-router",
-      "expo-iap",
       [
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#08253A"
         }
       ]
     ],
