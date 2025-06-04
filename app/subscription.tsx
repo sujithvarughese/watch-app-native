@@ -7,6 +7,7 @@ import {
   ScrollView,
   Alert,
 } from "react-native";
+import {LinearGradient} from 'expo-linear-gradient';
 import React, {useState, useEffect} from "react";
 import {BlurView} from "expo-blur";
 import * as Haptics from "expo-haptics";
@@ -16,6 +17,8 @@ import {
 import {PurchasesPackage} from "react-native-purchases";
 import {usePurchases} from "@/context/PurchasesContext";
 import {Redirect} from "expo-router";
+import {Image} from "expo-image";
+import {ThemedText} from "@/components/ThemedText";
 
 export default function SubscriptionScreen() {
 
@@ -26,6 +29,7 @@ export default function SubscriptionScreen() {
 
   useEffect(() => {
     const offerings = currentOffering?.availablePackages
+    console.log(offerings)
     setPackages(offerings ?? [])
   }, []);
 
@@ -62,97 +66,136 @@ export default function SubscriptionScreen() {
   };
 
   return (
-      <BlurView intensity={80} tint="dark" style={styles.content}>
-      <Text style={styles.title}>Premium Features</Text>
-        <Text style={styles.subtitle}>Unlock all features with a subscription</Text>
+    <View style={styles.container}>
+
+      <View style={styles.imageContainer}>
+        <Image source={require('../assets/images/subscription.jpeg')} style={styles.image}/>
+        <LinearGradient
+          colors={['rgba(0,0,0,1)', 'transparent']}
+          style={styles.gradientTop}
+        />
+        <LinearGradient
+          colors={['transparent', 'rgba(0,0,0,1)']}
+          style={styles.gradientBottom}
+        />
+      </View>
+
+      <View style={styles.heading}>
+        <ThemedText style={styles.title}>Authentime</ThemedText>
+        <ThemedText style={styles.subtitle}>Start free for 7 days, then {packages[1]?.product.pricePerMonthString}/month</ThemedText>
+        <ThemedText style={styles.description}>Get unlimited authentications with our highly trained AI models</ThemedText>
+      </View>
+
+
+
+
 
         <View style={styles.featureList}>
-          <Text style={styles.featureItem}>✨ Unlimited AI generations</Text>
-          <Text style={styles.featureItem}>🔄 Priority support</Text>
-          <Text style={styles.featureItem}>🎨 Advanced customization</Text>
-          <Text style={styles.featureItem}>📱 Access on all devices</Text>
+          <ThemedText style={styles.featureItem}>🔍 AI-Powered Watch Authentications</ThemedText>
+          <ThemedText style={styles.featureItem}>📊 Detailed Authenticity Reports</ThemedText>
+          <ThemedText style={styles.featureItem}>🕵️‍♂️ Counterfeit Detection Alerts</ThemedText>
+          <ThemedText style={styles.featureItem}>🕰️ Watch Database Access</ThemedText>
+          <ThemedText style={styles.featureItem}>📱 Access on all devices</ThemedText>
         </View>
+
         <View style={styles.plansContainer}>
-
-          <TouchableOpacity
-            style={styles.planButton}
-            onPress={() => handleSubscribe(packages[0])}
-            disabled={loading}
-          >
-            <Text style={styles.planTitle}>{packages[0]?.product.title}</Text>
-            <Text style={styles.price}>{packages[0]?.product.priceString}/month</Text>
-            <Text style={styles.trial}>Start with 7-day free trial</Text>
-          </TouchableOpacity>
-
           <TouchableOpacity
             style={[styles.planButton, styles.yearlyButton]}
             onPress={() => handleSubscribe(packages[1])}
             disabled={loading}
           >
-            <Text style={styles.planTitle}>{packages[1]?.product.title}</Text>
-            <Text style={styles.price}>{packages[1]?.product.priceString}/year</Text>
-            <Text style={styles.savings}>Save 17%</Text>
-            <Text style={styles.trial}>Start with 7-day free trial</Text>
+            <ThemedText style={styles.planTitle}>START FOR FREE 🙌</ThemedText>
           </TouchableOpacity>
-
+          <ThemedText>7 days free, then {packages[1]?.product.priceString} per year. (billed annually)</ThemedText>
+          <TouchableOpacity
+            style={styles.restoreButton}
+            onPress={handleRestore}
+            disabled={restoring}
+          >
+            <ThemedText style={styles.restoreText}>
+              {restoring ? "Restoring..." : "Restore Purchases"}
+            </ThemedText>
+          </TouchableOpacity>
         </View>
-
-        <TouchableOpacity
-          style={styles.restoreButton}
-          onPress={handleRestore}
-          disabled={restoring}
-        >
-          <Text style={styles.restoreText}>
-            {restoring ? "Restoring..." : "Restore Purchases"}
-          </Text>
-        </TouchableOpacity>
-      </BlurView>
-
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0A0F2C',
-  },
-  content: {
-    flex: 1,
-    backgroundColor: '#0A0F2C',
-    padding: 24,
-    paddingTop: 40,
+    justifyContent: 'space-between',
+    backgroundColor: 'black',
     alignItems: 'center',
+  },
+  imageContainer: {
+    width: '100%',
+    position: 'absolute',
+  },
+  image: {
+    height: 700,
+    width: '100%',
+
+  },
+  gradientTop: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 500,
+  },
+  gradientBottom: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 500,
+  },
+  heading: {
+    marginVertical: 70,
+    marginHorizontal: 30,
+    gap: 24,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 32,
+    fontWeight: 600,
+    color: 'white',
+    textAlign: 'center',
+    lineHeight: 36,
+  },
+  description: {
+    fontSize: 16,
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: '500',
   },
   featureList: {
     width: '100%',
     marginBottom: 30,
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 36
   },
   featureItem: {
     color: 'white',
     fontSize: 16,
     marginBottom: 15,
-    fontWeight: '500',
+    fontWeight: '600',
   },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: 'white',
-    marginTop: 40,
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.8)',
-    marginBottom: 30,
-    textAlign: 'center',
-  },
+
   plansContainer: {
     width: '100%',
-    marginBottom: 20,
+    marginBottom: 28,
+    alignItems: 'center',
   },
   planButton: {
-    width: '100%',
+    width: '80%',
     padding: 24,
     backgroundColor: '#007AFF',
     borderRadius: 20,
@@ -179,21 +222,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 5,
   },
-  price: {
-    fontSize: 18,
-    color: 'white',
-  },
-  savings: {
-    fontSize: 14,
-    color: 'white',
-    fontWeight: 'bold',
-    marginTop: 5,
-  },
-  trial: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.9)',
-    marginTop: 5,
-  },
+
   loader: {
     marginTop: 10,
   },

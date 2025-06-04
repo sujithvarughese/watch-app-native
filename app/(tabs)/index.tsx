@@ -15,7 +15,6 @@ export default function HomeScreen() {
         <Image source={require('../../assets/images/logo2.png')} style={styles.backgroundImage} />
       </View>
       <ImageUploadForm />
-      <SubscriptionModal />
     </View>
   );
 }

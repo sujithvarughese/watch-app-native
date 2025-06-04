@@ -20,6 +20,7 @@ export const SubscriptionModal = () => {
   const [packages, setPackages] = useState<PurchasesPackage[]>([]);
   const [isVisible, setIsVisible] = useState(true);
 
+
   useEffect(() => {
     const offerings = currentOffering?.availablePackages
     setPackages(offerings ?? [])
@@ -66,6 +67,18 @@ export const SubscriptionModal = () => {
     >
       <BlurView intensity={70} style={styles.modalBackground}>
         <View style={styles.modalContainer}>
+
+          <Text style={styles.title}>Start your 7 day free trial</Text>
+          <Text style={styles.subtitle}>Unlock all features with a subscription</Text>
+
+          <View style={styles.featureList}>
+            <Text style={styles.featureItem}>🔍 AI-Powered Watch Authentications</Text>
+            <Text style={styles.featureItem}>📊 Detailed Authenticity Reports</Text>
+            <Text style={styles.featureItem}>🕵️‍♂️ Counterfeit Detection Alerts</Text>
+            <Text style={styles.featureItem}>🕰️ Watch Database Access</Text>
+            <Text style={styles.featureItem}>📱 Access on all devices</Text>
+          </View>
+
           <Text style={styles.title}>Choose Your Plan</Text>
           <Text style={styles.subtitle}>Select the plan that works best for you</Text>
 
@@ -86,7 +99,7 @@ export const SubscriptionModal = () => {
           >
             <Text style={styles.planTitle}>{packages[1]?.product.title}</Text>
             <Text style={styles.price}>{packages[1]?.product.priceString}/year</Text>
-            <Text style={styles.savings}>Save 17%</Text>
+            <Text style={styles.savings}>Save 25%</Text>
             <Text style={styles.trial}>Start with 7-day free trial</Text>
           </TouchableOpacity>
 
@@ -128,6 +141,16 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+  featureList: {
+    width: '100%',
+    marginBottom: 30,
+    padding: 10,
+  },
+  featureItem: {
+    fontSize: 16,
+    marginBottom: 15,
+    fontWeight: '500',
   },
   title: {
     fontSize: 24,

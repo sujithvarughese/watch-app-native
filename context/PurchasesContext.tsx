@@ -13,6 +13,7 @@ export type PurchasesContextProps = {
   purchasePackage: (
     packageToPurchase: PurchasesPackage
   ) => Promise<MakePurchaseResult>;
+  restorePurchases: () => Promise<CustomerInfo>;
   customerInfo?: CustomerInfo;
   getOfferings: () => Promise<PurchasesOffering>;
   validated: boolean;

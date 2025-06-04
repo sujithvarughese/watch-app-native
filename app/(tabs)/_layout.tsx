@@ -15,6 +15,9 @@ const TabLayout = () => {
     console.log(validated)
   }, [validated]);
 
+  if (!validated) return <Redirect href="/subscription" />
+
+
   return (
     <Tabs
       screenOptions={{

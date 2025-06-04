@@ -53,15 +53,10 @@ const PurchasesProvider: React.FC<PurchasesProviderProps> = ({ children }) => {
     return currentOffering as PurchasesOffering;
   };
 
-  /**
-   * @param purchasedPackage The package to purchase
-   * @returns The result of the purchase
-   */
   const purchasePackage = async (purchasedPackage: PurchasesPackage) => {
     try {
       const result = await Purchases.purchasePackage(purchasedPackage);
       setCustomerInfo(result.customerInfo);
-      console.log(result.customerInfo);
       return result;
     } catch (error) {
       console.error('Error purchasing package:', error);
@@ -69,31 +64,27 @@ const PurchasesProvider: React.FC<PurchasesProviderProps> = ({ children }) => {
     }
   };
 
-  const restorePurchases = async () => {
+  const restorePurchases = async (): Promise<CustomerInfo> => {
     try {
       const result = await Purchases.restorePurchases();
-      console.log(result)
       setCustomerInfo(result);
+      return result;
     } catch (error) {
       console.error('Error restoring purchases:', error);
       throw error;
     }
   };
 
-  // Fetch the customer info from RevenueCat
+
   const getCustomerInfo = async () => {
     const customerInfo = await Purchases.getCustomerInfo();
-    console.log("customer info:", customerInfo)
+    console.log(customerInfo)
     setCustomerInfo(customerInfo);
   };
 
-  /**
-   * Check if the user is subscribed to any offering
-   * @returns True if the user is subscribed to any offering
-   */
   const validateUser = async () => {
     if (!initialized || !customerInfo) return;
-    const isPro = customerInfo.activeSubscriptions.length > 0;
+    const isPro = customerInfo.entitlements.active["Pro"] !== undefined;
     setValidated(isPro);
   };
 
@@ -117,6 +108,7 @@ const PurchasesProvider: React.FC<PurchasesProviderProps> = ({ children }) => {
       value={{
         currentOffering: offering,
         purchasePackage,
+        restorePurchases,
         customerInfo,
         getOfferings,
         validated
