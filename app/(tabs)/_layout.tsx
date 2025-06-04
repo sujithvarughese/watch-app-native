@@ -1,12 +1,19 @@
 import {StyleSheet, useColorScheme, View} from "react-native";
-import {Tabs} from "expo-router";
+import {Redirect, Tabs} from "expo-router";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import {usePurchases} from "@/context/PurchasesContext";
+import {useEffect} from "react";
 
 const TabLayout = () => {
 
   const colorScheme = useColorScheme()
+  const { validated } = usePurchases()
+
+  useEffect(() => {
+    console.log(validated)
+  }, [validated]);
 
   return (
     <Tabs

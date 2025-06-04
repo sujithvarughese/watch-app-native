@@ -3,13 +3,14 @@ import {SafeAreaProvider} from "react-native-safe-area-context";
 import {Provider} from "react-redux";
 import {SafeAreaView, useColorScheme} from "react-native";
 import {store} from "@/store/store";
+import PurchasesProvider from "@/context/PurchasesProvider";
 
 export default function RootLayout() {
 
   let colorScheme = useColorScheme()
 
   return (
-
+    <PurchasesProvider>
       <Provider store={store}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "" }} />
@@ -18,6 +19,8 @@ export default function RootLayout() {
           <Stack.Screen name="+not-found" />
         </Stack>
       </Provider>
+    </PurchasesProvider>
+
 
 
   );

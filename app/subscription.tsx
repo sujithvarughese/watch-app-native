@@ -10,21 +10,23 @@ import {
 import React, {useState, useEffect} from "react";
 import {BlurView} from "expo-blur";
 import * as Haptics from "expo-haptics";
-import {getPackages, purchasePackage, restorePurchases} from "@/utilities/revenuecat";
+import {
+  restorePurchases
+} from "@/utilities/revenuecat";
 import {PurchasesPackage} from "react-native-purchases";
+import {usePurchases} from "@/context/PurchasesContext";
+import {Redirect} from "expo-router";
 
 export default function SubscriptionScreen() {
+
+  const { currentOffering, purchasePackage } = usePurchases()
   const [loading, setLoading] = useState(false);
   const [restoring, setRestoring] = useState(false);
   const [packages, setPackages] = useState<PurchasesPackage[]>([]);
 
-  const fetchPackages = async () => {
-    const result = await getPackages();
-    setPackages(result);
-  }
-
   useEffect(() => {
-    fetchPackages()
+    const offerings = currentOffering?.availablePackages
+    setPackages(offerings ?? [])
   }, []);
 
   const handleSubscribe = async (pkg: PurchasesPackage) => {
@@ -60,7 +62,6 @@ export default function SubscriptionScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
       <BlurView intensity={80} tint="dark" style={styles.content}>
       <Text style={styles.title}>Premium Features</Text>
         <Text style={styles.subtitle}>Unlock all features with a subscription</Text>
@@ -81,7 +82,6 @@ export default function SubscriptionScreen() {
             <Text style={styles.planTitle}>{packages[0]?.product.title}</Text>
             <Text style={styles.price}>{packages[0]?.product.priceString}/month</Text>
             <Text style={styles.trial}>Start with 7-day free trial</Text>
-            {loading && <ActivityIndicator color="white" style={styles.loader}/>}
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -93,7 +93,6 @@ export default function SubscriptionScreen() {
             <Text style={styles.price}>{packages[1]?.product.priceString}/year</Text>
             <Text style={styles.savings}>Save 17%</Text>
             <Text style={styles.trial}>Start with 7-day free trial</Text>
-            {loading && <ActivityIndicator color="white" style={styles.loader}/>}
           </TouchableOpacity>
 
         </View>
@@ -108,7 +107,7 @@ export default function SubscriptionScreen() {
           </Text>
         </TouchableOpacity>
       </BlurView>
-    </ScrollView>
+
   );
 }
 
@@ -119,6 +118,7 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
+    backgroundColor: '#0A0F2C',
     padding: 24,
     paddingTop: 40,
     alignItems: 'center',

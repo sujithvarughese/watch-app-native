@@ -3,6 +3,8 @@ import Button from "@/components/Button";
 import ImageViewer from "@/components/ImageViewer";
 import ImageUploadForm from "@/components/ImageUploadForm";
 import {Image} from "expo-image";
+import {SubscriptionModal} from "@/components/Subscriptions";
+import React from "react";
 
 
 export default function HomeScreen() {
@@ -12,7 +14,8 @@ export default function HomeScreen() {
       <View style={styles.backgroundImageContainer}>
         <Image source={require('../../assets/images/logo2.png')} style={styles.backgroundImage} />
       </View>
-     <ImageUploadForm />
+      <ImageUploadForm />
+      <SubscriptionModal />
     </View>
   );
 }

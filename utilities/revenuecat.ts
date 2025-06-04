@@ -45,6 +45,7 @@ export const getPackages = async (): Promise<PurchasesPackage[]> => {
 export const purchasePackage = async (pack: PurchasesPackage): Promise<CustomerInfo> => {
   try {
     const {customerInfo} = await Purchases.purchasePackage(pack);
+    console.log(customerInfo);
     return customerInfo;
   } catch (error) {
     console.error('Error purchasing package:', error);
