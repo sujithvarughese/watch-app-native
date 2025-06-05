@@ -1,4 +1,4 @@
-import {StyleSheet, View, TouchableOpacity, Alert,} from "react-native";
+import {StyleSheet, View, TouchableOpacity, Alert, ActivityIndicator,} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import React, {useState, useEffect} from "react";
 import * as Haptics from "expo-haptics";
@@ -72,12 +72,13 @@ export default function SubscriptionScreen() {
 
       <View style={styles.heading}>
         <ThemedText style={styles.title}>Authentime</ThemedText>
-        <ThemedText style={styles.subtitle}>Try free for 7 days, then {packages[1]?.product.priceString}/year</ThemedText>
-        <ThemedText style={styles.description}>Get unlimited authentications with our highly trained AI models</ThemedText>
+        <ThemedText style={styles.subtitle}>Try free for 7 days, then {packages[1]?.product.priceString}/year.</ThemedText>
+        <ThemedText style={styles.description}>Get unlimited watch authentications with our highly trained AI models.</ThemedText>
       </View>
 
       <View style={styles.featureList}>
         <ThemedText style={styles.featureItem}>🔍 AI-Powered Watch Authentications</ThemedText>
+        <ThemedText style={styles.featureItem}>👨‍💻 Expert-level analysis in seconds</ThemedText>
         <ThemedText style={styles.featureItem}>📊 Detailed Authenticity Reports</ThemedText>
         <ThemedText style={styles.featureItem}>🕵️‍♂️ Counterfeit Detection Alerts</ThemedText>
         <ThemedText style={styles.featureItem}>🕰️ Watch Database Access</ThemedText>
@@ -90,7 +91,7 @@ export default function SubscriptionScreen() {
           onPress={() => handleSubscribe(packages[1])}
           disabled={loading}
         >
-          <ThemedText style={styles.planTitle}>START FOR FREE 🙌</ThemedText>
+          {loading ? <ActivityIndicator size="large" color="white" style={{ width: 80 }} /> : <ThemedText style={styles.planTitle}>START FOR FREE 🙌</ThemedText>}
         </TouchableOpacity>
         <ThemedText style={styles.trial}>7 days free, then {packages[1]?.product.priceString} per year. (billed annually)</ThemedText>
         <TouchableOpacity
@@ -161,11 +162,11 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontWeight: '500',
+    paddingHorizontal: 36,
   },
   featureList: {
     width: '100%',
-    marginBottom: 30,
-    paddingVertical: 10,
+    marginBottom: 70,
     paddingHorizontal: 36
   },
   featureItem: {

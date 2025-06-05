@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView, Image, useColorScheme} from 'react-native';
 import {ThemedText} from '@/components/ThemedText';
-import {ThemedView} from '@/components/ThemedView';
 import {LinearGradient} from "expo-linear-gradient";
 
 export default function AboutScreen() {

@@ -8,10 +8,9 @@ import {Colors} from "@/constants/Colors";
 
 const TabLayout = () => {
 
-  const colorScheme = useColorScheme()
   const { validated } = usePurchases()
 
-  // if (!validated) return <Redirect href="/subscription" />
+  if (!validated) return <Redirect href="/subscription" />
 
   return (
     <Tabs
