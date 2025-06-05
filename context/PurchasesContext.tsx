@@ -17,6 +17,7 @@ export type PurchasesContextProps = {
   customerInfo?: CustomerInfo;
   getOfferings: () => Promise<PurchasesOffering>;
   validated: boolean;
+  validateUser: () => void;
 };
 
 const PurchasesContext = createContext<PurchasesContextProps | null>(null);

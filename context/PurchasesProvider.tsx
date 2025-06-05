@@ -78,7 +78,6 @@ const PurchasesProvider: React.FC<PurchasesProviderProps> = ({ children }) => {
 
   const getCustomerInfo = async () => {
     const customerInfo = await Purchases.getCustomerInfo();
-    console.log(customerInfo)
     setCustomerInfo(customerInfo);
   };
 
@@ -111,7 +110,8 @@ const PurchasesProvider: React.FC<PurchasesProviderProps> = ({ children }) => {
         restorePurchases,
         customerInfo,
         getOfferings,
-        validated
+        validated,
+        validateUser,
       }}
     >
       {children}

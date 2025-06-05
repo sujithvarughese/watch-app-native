@@ -22,7 +22,7 @@ import {ThemedText} from "@/components/ThemedText";
 
 export default function SubscriptionScreen() {
 
-  const { currentOffering, purchasePackage } = usePurchases()
+  const { currentOffering, purchasePackage, validateUser } = usePurchases()
   const [loading, setLoading] = useState(false);
   const [restoring, setRestoring] = useState(false);
   const [packages, setPackages] = useState<PurchasesPackage[]>([]);
@@ -41,7 +41,9 @@ export default function SubscriptionScreen() {
         throw new Error("No subscription package selected.");
       }
       await purchasePackage(pkg);
+      validateUser()
       Alert.alert("Success", "Subscription successful!");
+
     } catch (error) {
       Alert.alert("Error", "Subscription failed. Please try again.");
     } finally {
@@ -54,6 +56,7 @@ export default function SubscriptionScreen() {
     try {
       const purchases = await restorePurchases();
       if (purchases) {
+        validateUser()
         Alert.alert("Success", "Purchases restored successfully!");
       } else {
         Alert.alert("Info", "No purchases to restore");
@@ -82,7 +85,7 @@ export default function SubscriptionScreen() {
 
       <View style={styles.heading}>
         <ThemedText style={styles.title}>Authentime</ThemedText>
-        <ThemedText style={styles.subtitle}>Start free for 7 days, then {packages[1]?.product.pricePerMonthString}/month</ThemedText>
+        <ThemedText style={styles.subtitle}>Try free for 7 days, then {packages[1]?.product.priceString}/year</ThemedText>
         <ThemedText style={styles.description}>Get unlimited authentications with our highly trained AI models</ThemedText>
       </View>
 

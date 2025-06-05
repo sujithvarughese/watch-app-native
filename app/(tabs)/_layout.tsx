@@ -4,28 +4,23 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import {usePurchases} from "@/context/PurchasesContext";
-import {useEffect} from "react";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import {Colors} from "@/constants/Colors";
 
 const TabLayout = () => {
 
   const colorScheme = useColorScheme()
   const { validated } = usePurchases()
 
-  useEffect(() => {
-    console.log(validated)
-  }, [validated]);
-
-  if (!validated) return <Redirect href="/subscription" />
-
+  // if (!validated) return <Redirect href="/subscription" />
 
   return (
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
-        headerShown: false,
-        headerStyle: { backgroundColor: "#25292e"},
+        headerStyle: { backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.tint },
         tabBarStyle: {
-          backgroundColor: colorScheme === 'dark' ? "black" : "white",
+          backgroundColor: "black",
           height: 70,
           elevation: 10,
           shadowColor: '#000',
@@ -37,7 +32,7 @@ const TabLayout = () => {
           shadowOpacity: 0.1,
           shadowRadius: 3,
           borderTopWidth: 0.5,
-          borderTopColor: colorScheme === 'dark' ? '#333' : '#e5e5e5',
+          borderTopColor: '#333'
         },
       }}
     >
@@ -55,7 +50,7 @@ const TabLayout = () => {
         options={{
           title: '',
           tabBarIcon: ({ color, focused}) => (
-            <MaterialIcons name="library-books" size={28} color={color} />
+            <MaterialCommunityIcons name='database-search' size={28} color={color} />
           )
         }}
       />

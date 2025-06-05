@@ -8,6 +8,7 @@ import {
   Linking,
   ScrollView
 } from "react-native";
+import {LinearGradient} from 'expo-linear-gradient';
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchModelDetails} from "@/store/globalSlice";
@@ -30,10 +31,17 @@ export default function ResearchScreen() {
   return (
     <ScrollView style={styles.container}>
       <Image source={require('../../assets/images/banner.jpeg')} style={styles.imageContainer} />
-      <View style={styles.searchContainer}>
-        <TextInput
+      <View style={styles.headerContainer}>
+        <ThemedText style={styles.headerDescription}>
+          Enter your watch's make and model below to get detailed information about your timepiece.
+        </ThemedText>
+      </View>
+      <LinearGradient
+        colors={['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)']}
+        style={styles.searchContainer}>
+      <TextInput
           style={styles.input}
-          placeholder="Enter watch make and model"
+          placeholder="Rolex Datejust 1200"
           value={searchQuery}
           onChangeText={setSearchQuery}
         />
@@ -45,12 +53,11 @@ export default function ResearchScreen() {
             <Text style={styles.buttonText}>Search</Text>
           </TouchableOpacity>
         }
-      </View>
-
+      </LinearGradient>
 
       {modelDetails && (
         <View style={styles.resultsContainer}>
-          <Text style={styles.title}>{modelDetails.name}</Text>
+          <ThemedText style={styles.title}>{modelDetails.name}</ThemedText>
           {modelDetails.reference && <ThemedText style={styles.details}>Reference: {modelDetails.reference}</ThemedText>}
           <ThemedText style={styles.details}>{modelDetails.price}</ThemedText>
           <ThemedText style={styles.details}>{modelDetails.productionYear}</ThemedText>
@@ -65,6 +72,22 @@ export default function ResearchScreen() {
 }
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    padding: 20,
+    paddingBottom: 0,
+  },
+  headerTitle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 10,
+  },
+  headerDescription: {
+    fontSize: 16,
+    color: 'rgba(255, 255, 255, 0.8)',
+    marginBottom: 20,
+    lineHeight: 24,
+  },
   link: {
     color: '#007AFF',
     textDecorationLine: 'underline',
@@ -73,7 +96,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#1a1c1e',
+    backgroundColor: 'black',
   },
   imageContainer: {
     height: 100,
@@ -82,7 +105,9 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     flexDirection: 'row',
-    margin: 20,
+    margin: 12,
+    padding: 20,
+    borderRadius: 15,
     shadowColor: "#000",
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.25,
@@ -119,7 +144,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.08)',
     padding: 25,
     borderRadius: 15,
-    margin: 20,
+    margin: 12,
     shadowColor: "#000",
     shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.3,
@@ -132,6 +157,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 15,
     letterSpacing: 0.5,
+    textAlign: 'center',
   },
   details: {
     color: 'rgba(255, 255, 255, 0.9)',

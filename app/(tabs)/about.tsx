@@ -1,21 +1,22 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image} from 'react-native';
+import {StyleSheet, View, ScrollView, Image, useColorScheme} from 'react-native';
 import {ThemedText} from '@/components/ThemedText';
 import {ThemedView} from '@/components/ThemedView';
 import {Stack} from 'expo-router';
 
 export default function AboutScreen() {
-  return (
-    <>
-      <Stack.Screen options={{title: 'About Authentime'}}/>
-      <Image source={require('../../assets/images/banner.jpeg')} style={styles.imageContainer} />
 
+  const colorScheme = useColorScheme()
+
+  return (
+    <ThemedView>
       <ScrollView>
         <ThemedView style={styles.container}>
-          <Image
-            source={require('../../assets/images/logo2.png')}
-            style={styles.logo}
-          />
+          {colorScheme === 'dark' ?
+            <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
+            :
+            <Image source={require('../../assets/images/logo-light.png')} style={styles.logo} />
+          }
           <ThemedText style={styles.description}>
             Welcome to Authentime, your trusted companion in watch authentication.
             Our advanced AI technology helps you verify the authenticity of luxury
@@ -60,7 +61,7 @@ export default function AboutScreen() {
           </View>
         </ThemedView>
       </ScrollView>
-    </>
+    </ThemedView>
   );
 }
 
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: "100%",
-    height: 120,
+    height: 200,
     marginBottom: 20,
   },
   title: {
