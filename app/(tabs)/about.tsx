@@ -60,7 +60,7 @@ export default function AboutScreen() {
           of Service.
         </ThemedText>
         <View style={styles.footer}>
-          <ThemedText style={styles.version}>Version 1.0.1</ThemedText>
+          <ThemedText style={styles.version}>Version 1.0.9</ThemedText>
           <ThemedText style={styles.copyright}>
             © 2024 Authentime. All rights reserved.
           </ThemedText>
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   image: {
     height: 720,
     width: '100%',
+    opacity: 0.5,
   },
   gradientTop: {
     position: 'absolute',
