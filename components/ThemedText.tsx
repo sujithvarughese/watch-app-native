@@ -36,7 +36,8 @@ export function ThemedText({
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: "AvenirNext-Regular"
+    fontFamily: "AvenirNext-Regular",
+    fontWeight: 500,
   },
   default: {
     fontSize: 16,

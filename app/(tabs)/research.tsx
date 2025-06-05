@@ -1,20 +1,10 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  ActivityIndicator,
-  Linking,
-  ScrollView
-} from "react-native";
+import {StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator, Linking, ScrollView} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
-import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
 import {fetchModelDetails} from "@/store/globalSlice";
 import {useAppSelector} from "@/store/hooks";
 import {Image} from "expo-image";
-import type {ModelDetails} from "@/store/globalSlice";
 import {ThemedText} from "@/components/ThemedText";
 
 export default function ResearchScreen() {
@@ -29,49 +19,75 @@ export default function ResearchScreen() {
     }
   };
   return (
-    <ScrollView style={styles.container}>
-      <Image source={require('../../assets/images/banner.jpeg')} style={styles.imageContainer} />
-      <View style={styles.headerContainer}>
-        <ThemedText style={styles.headerDescription}>
-          Enter your watch's make and model below to get detailed information about your timepiece.
-        </ThemedText>
-      </View>
-      <LinearGradient
-        colors={['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)']}
-        style={styles.searchContainer}>
-      <TextInput
-          style={styles.input}
-          placeholder="Rolex Datejust 1200"
-          value={searchQuery}
-          onChangeText={setSearchQuery}
+    <View style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image source={require('../../assets/images/subscription.jpeg')} style={styles.image}/>
+        <LinearGradient
+          colors={['rgba(0,0,0,1)', 'transparent']}
+          style={styles.gradientTop}
         />
-        {loading
-          ?
-          <ActivityIndicator size="large" style={{ width: 80 }} />
-          :
-          <TouchableOpacity style={styles.button} onPress={handleSearch}>
-            <Text style={styles.buttonText}>Search</Text>
-          </TouchableOpacity>
-        }
-      </LinearGradient>
+        <LinearGradient
+          colors={['transparent', 'rgba(0,0,0,1)']}
+          style={styles.gradientBottom}
+        />
+      </View>
+      <View style={styles.backgroundImageContainer}>
+        <Image source={require('../../assets/images/logo-light.png')} style={styles.backgroundImage} />
+      </View>
 
-      {modelDetails && (
-        <View style={styles.resultsContainer}>
-          <ThemedText style={styles.title}>{modelDetails.name}</ThemedText>
-          {modelDetails.reference && <ThemedText style={styles.details}>Reference: {modelDetails.reference}</ThemedText>}
-          <ThemedText style={styles.details}>{modelDetails.price}</ThemedText>
-          <ThemedText style={styles.details}>{modelDetails.productionYear}</ThemedText>
-          <ThemedText style={styles.details}>{modelDetails.details}</ThemedText>
-          <TouchableOpacity onPress={() => Linking.openURL(modelDetails.link)}>
-            <Text style={styles.link}>{modelDetails.link}</Text>
-          </TouchableOpacity>
+
+      <ScrollView style={styles.content}>
+        <View style={styles.headerContainer}>
+          <ThemedText style={styles.headerDescription}>
+            Enter your watch's make and model below to get detailed information about your timepiece.
+          </ThemedText>
         </View>
-      )}
-    </ScrollView>
+        <LinearGradient
+          colors={['rgba(0,0,0,0.1)', 'rgba(0,0,0,0.6)']}
+          style={styles.searchContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Rolex Datejust 1200"
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+          />
+          {loading
+            ?
+            <ActivityIndicator size="large" style={{ width: 80 }} />
+            :
+            <TouchableOpacity style={styles.button} onPress={handleSearch}>
+              <Text style={styles.buttonText}>Search</Text>
+            </TouchableOpacity>
+          }
+        </LinearGradient>
+
+        {modelDetails && (
+          <View style={styles.resultsContainer}>
+            <ThemedText style={styles.title}>{modelDetails.name}</ThemedText>
+            {modelDetails.reference && <ThemedText style={styles.details}>Reference: {modelDetails.reference}</ThemedText>}
+            <ThemedText style={styles.details}>{modelDetails.price}</ThemedText>
+            <ThemedText style={styles.details}>{modelDetails.productionYear}</ThemedText>
+            <ThemedText style={styles.details}>{modelDetails.details}</ThemedText>
+            <TouchableOpacity onPress={() => Linking.openURL(modelDetails.link)}>
+              <Text style={styles.link}>{modelDetails.link}</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </ScrollView>
+    </View>
+
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'black',
+    paddingTop: 70
+  },
+  content: {
+    paddingTop: 220
+  },
   headerContainer: {
     padding: 20,
     paddingBottom: 0,
@@ -94,14 +110,38 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontSize: 16,
   },
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-  },
   imageContainer: {
-    height: 100,
+    width: '100%',
+    position: 'absolute',
+  },
+  image: {
+    height: 720,
+    width: '100%',
+  },
+  gradientTop: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 500,
+  },
+  gradientBottom: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: 500,
+  },
+  backgroundImageContainer: {
+    position: 'absolute',
+    opacity: 0.8,
     width: "100%",
-    zIndex: 100,
+    top: 0,
+    padding: 36,
+
+  },
+  backgroundImage: {
+    height: 300
   },
   searchContainer: {
     flexDirection: 'row',
@@ -141,7 +181,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   resultsContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
     padding: 25,
     borderRadius: 15,
     margin: 12,
@@ -163,12 +203,5 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.9)',
     marginBottom: 20,
     lineHeight: 24,
-  },
-  image: {
-    width: 200,
-    height: 200,
-    borderRadius: 10,
-    marginBottom: 10,
-    zIndex: 100,
   },
 });

@@ -1,8 +1,7 @@
-import {StyleSheet, useColorScheme, View} from "react-native";
+import {StyleSheet, useColorScheme} from "react-native";
 import {Redirect, Tabs} from "expo-router";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import {usePurchases} from "@/context/PurchasesContext";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {Colors} from "@/constants/Colors";
@@ -18,7 +17,8 @@ const TabLayout = () => {
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
-        headerStyle: { backgroundColor: colorScheme === 'dark' ? Colors.dark.background : Colors.light.tint },
+        headerShown: false,
+        headerStyle: { backgroundColor:  Colors.dark.background, height: 70 },
         tabBarStyle: {
           backgroundColor: "black",
           height: 70,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
+import {ScrollView, StyleSheet, Text, View} from "react-native";
 import {useAppSelector} from "@/store/hooks";
 import {ThemedText} from "@/components/ThemedText";
 
@@ -50,10 +50,9 @@ const getColor = (rating: number) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 15,
-    shadowColor: '#000',
+    padding: 16,
+    backgroundColor: '#000',
+    shadowColor: '#fff',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 8,
@@ -63,27 +62,28 @@ const styles = StyleSheet.create({
     fontSize: 28,
     marginBottom: 15,
     fontWeight: '800',
-    color: '#1a1a1a',
+    color: '#fff',
     letterSpacing: 0.5,
   },
   details: {
     fontSize: 16,
     marginBottom: 20,
-    color: '#666',
+    color: '#e0e0e0',
+    fontWeight: 500,
     lineHeight: 24,
   },
   chartContainer: {
     marginVertical: 25,
     padding: 15,
-    backgroundColor: '#f8f9fa',
+    backgroundColor: '#1a1a1a',
     borderRadius: 12,
   },
   barContainer: {
     marginBottom: 20,
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#2d2d2d',
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: '#fff',
     shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.05,
     shadowRadius: 3,
@@ -92,13 +92,13 @@ const styles = StyleSheet.create({
   barLabel: {
     marginBottom: 8,
     fontSize: 15,
-    color: '#444',
+    color: '#fff',
   },
   barWrapper: {
     flexDirection: 'row',
     alignItems: 'center',
     height: 30,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#404040',
     borderRadius: 6,
     overflow: 'hidden',
   },
@@ -114,13 +114,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     marginBottom: 10,
-    color: '#2c3e50',
+    color: '#fff',
   },
   cardComment: {
     fontSize: 14,
-    color: '#666',
+    color: '#e0e0e0',
     lineHeight: 20,
     marginTop: 8,
+    fontWeight: 500
   },
 });
 

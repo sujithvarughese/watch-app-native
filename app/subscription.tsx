@@ -1,22 +1,10 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ActivityIndicator,
-  ScrollView,
-  Alert,
-} from "react-native";
+import {StyleSheet, View, TouchableOpacity, Alert,} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import React, {useState, useEffect} from "react";
-import {BlurView} from "expo-blur";
 import * as Haptics from "expo-haptics";
-import {
-  restorePurchases
-} from "@/utilities/revenuecat";
+import {restorePurchases} from "@/utilities/revenuecat";
 import {PurchasesPackage} from "react-native-purchases";
 import {usePurchases} from "@/context/PurchasesContext";
-import {Redirect} from "expo-router";
 import {Image} from "expo-image";
 import {ThemedText} from "@/components/ThemedText";
 
@@ -29,7 +17,6 @@ export default function SubscriptionScreen() {
 
   useEffect(() => {
     const offerings = currentOffering?.availablePackages
-    console.log(offerings)
     setPackages(offerings ?? [])
   }, []);
 
@@ -89,37 +76,34 @@ export default function SubscriptionScreen() {
         <ThemedText style={styles.description}>Get unlimited authentications with our highly trained AI models</ThemedText>
       </View>
 
+      <View style={styles.featureList}>
+        <ThemedText style={styles.featureItem}>🔍 AI-Powered Watch Authentications</ThemedText>
+        <ThemedText style={styles.featureItem}>📊 Detailed Authenticity Reports</ThemedText>
+        <ThemedText style={styles.featureItem}>🕵️‍♂️ Counterfeit Detection Alerts</ThemedText>
+        <ThemedText style={styles.featureItem}>🕰️ Watch Database Access</ThemedText>
+        <ThemedText style={styles.featureItem}>📱 Access on all devices</ThemedText>
+      </View>
 
+      <View style={styles.plansContainer}>
+        <TouchableOpacity
+          style={[styles.planButton, styles.yearlyButton]}
+          onPress={() => handleSubscribe(packages[1])}
+          disabled={loading}
+        >
+          <ThemedText style={styles.planTitle}>START FOR FREE 🙌</ThemedText>
+        </TouchableOpacity>
+        <ThemedText style={styles.trial}>7 days free, then {packages[1]?.product.priceString} per year. (billed annually)</ThemedText>
+        <TouchableOpacity
+          style={styles.restoreButton}
+          onPress={handleRestore}
+          disabled={restoring}
+        >
+          <ThemedText style={styles.restoreText}>
+            {restoring ? "Restoring..." : "Restore Purchases"}
+          </ThemedText>
+        </TouchableOpacity>
+      </View>
 
-
-
-        <View style={styles.featureList}>
-          <ThemedText style={styles.featureItem}>🔍 AI-Powered Watch Authentications</ThemedText>
-          <ThemedText style={styles.featureItem}>📊 Detailed Authenticity Reports</ThemedText>
-          <ThemedText style={styles.featureItem}>🕵️‍♂️ Counterfeit Detection Alerts</ThemedText>
-          <ThemedText style={styles.featureItem}>🕰️ Watch Database Access</ThemedText>
-          <ThemedText style={styles.featureItem}>📱 Access on all devices</ThemedText>
-        </View>
-
-        <View style={styles.plansContainer}>
-          <TouchableOpacity
-            style={[styles.planButton, styles.yearlyButton]}
-            onPress={() => handleSubscribe(packages[1])}
-            disabled={loading}
-          >
-            <ThemedText style={styles.planTitle}>START FOR FREE 🙌</ThemedText>
-          </TouchableOpacity>
-          <ThemedText>7 days free, then {packages[1]?.product.priceString} per year. (billed annually)</ThemedText>
-          <TouchableOpacity
-            style={styles.restoreButton}
-            onPress={handleRestore}
-            disabled={restoring}
-          >
-            <ThemedText style={styles.restoreText}>
-              {restoring ? "Restoring..." : "Restore Purchases"}
-            </ThemedText>
-          </TouchableOpacity>
-        </View>
     </View>
   );
 }
@@ -138,7 +122,6 @@ const styles = StyleSheet.create({
   image: {
     height: 700,
     width: '100%',
-
   },
   gradientTop: {
     position: 'absolute',
@@ -191,7 +174,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     fontWeight: '600',
   },
-
   plansContainer: {
     width: '100%',
     marginBottom: 28,
@@ -225,9 +207,11 @@ const styles = StyleSheet.create({
     color: 'white',
     marginBottom: 5,
   },
-
   loader: {
     marginTop: 10,
+  },
+  trial: {
+    color: 'white',
   },
   restoreButton: {
     padding: 15,

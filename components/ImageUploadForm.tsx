@@ -1,14 +1,12 @@
-import {View, StyleSheet, ActivityIndicator, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
-import Button from '@/components/Button';
 import ImageViewer from '@/components/ImageViewer';
 import {useAppDispatch, useAppSelector} from "@/store/hooks";
 import {fetchWatchDetails} from "@/store/globalSlice";
 import {router} from "expo-router";
 import IconButton from "@/components/IconButton";
 import CircleButton from "@/components/CircleButton";
-import {Image} from "expo-image";
 import {ThemedText} from "@/components/ThemedText";
 import Loading from "@/components/Loading";
 
@@ -52,25 +50,23 @@ export default function ImageUploadForm() {
 
   return (
     <View style={styles.container}>
-      {!selectedImages?.length &&
-        <View style={styles.instructionsContainer}>
+      <View style={styles.instructionsContainer}>
+        <ThemedText style={styles.instructionsHeader}>Upload Instructions:</ThemedText>
+        <ThemedText style={styles.instructions}>
+          • Upload clear, well-lit images of your watch{'\n'}
+          • Make sure the watch is clean and not obscured by any objects{'\n'}
+          • Include detailed images of:{'\n'}
+          {'  '}- Dial{'\n'}
+          {'  '}- Crown{'\n'}
+          {'  '}- Case{'\n'}
+          {'  '}- Bezel{'\n'}
+          {'  '}- Band or Bracelet{'\n'}
+          {'  '}- Clasp or Buckle{'\n'}
+          {'  '}- Caseback{'\n'}
+          {'  '}- Side Case Profile
+        </ThemedText>
+      </View>
 
-          <ThemedText style={styles.instructionsHeader}>Upload Instructions:</ThemedText>
-          <ThemedText style={styles.instructions}>
-            • Upload clear, well-lit images of your watch{'\n'}
-            • Make sure the watch is clean and not obscured by any objects{'\n'}
-            • Include detailed images of:{'\n'}
-            {'  '}- Dial{'\n'}
-            {'  '}- Crown{'\n'}
-            {'  '}- Case{'\n'}
-            {'  '}- Bezel{'\n'}
-            {'  '}- Band or Bracelet{'\n'}
-            {'  '}- Clasp or Buckle{'\n'}
-            {'  '}- Caseback{'\n'}
-            {'  '}- Side Case Profile
-          </ThemedText>
-        </View>
-      }
 
       <View style={styles.imageContainer}>
         <ImageViewer imgSource={PlaceholderImage} selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
@@ -91,8 +87,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+
   },
   instructionsContainer: {
+    position: 'absolute',
+    top: 190,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 12,
     padding: 16,
@@ -111,6 +110,7 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     lineHeight: 24,
     fontSize: 14,
+    fontWeight: '500',
   },
   imageContainer: {
 

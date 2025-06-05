@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity} from "react-native";
+import {StyleSheet, TouchableOpacity} from "react-native";
 import React from "react";
 import {ThemedText} from "@/components/ThemedText";
 import { TouchableOpacityProps } from "react-native";

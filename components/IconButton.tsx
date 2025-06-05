@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet, Text, TouchableOpacity, TouchableOpacityProps} from 'react-native';
+import {StyleSheet, TouchableOpacity, TouchableOpacityProps} from 'react-native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import {ThemedText} from "@/components/ThemedText";
 
@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
   iconButtonLabel: {
     color: '#fff',
     marginTop: 12,
+    fontWeight: 500
   },
 });
