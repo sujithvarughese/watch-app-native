@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     height: 500,
   },
   heading: {
-    marginVertical: 70,
+    marginVertical: 24,
     marginHorizontal: 30,
     gap: 24,
   },

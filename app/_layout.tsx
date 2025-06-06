@@ -6,8 +6,6 @@ import PurchasesProvider from "@/context/PurchasesProvider";
 
 export default function RootLayout() {
 
-  let colorScheme = useColorScheme()
-
   return (
     <PurchasesProvider>
       <Provider store={store}>
