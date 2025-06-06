@@ -1,4 +1,14 @@
-import {StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator, Linking, ScrollView} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  ActivityIndicator,
+  Linking,
+  ScrollView,
+  useWindowDimensions
+} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
@@ -8,6 +18,7 @@ import {Image} from "expo-image";
 import {ThemedText} from "@/components/ThemedText";
 
 export default function ResearchScreen() {
+  const { width } = useWindowDimensions()
   const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
   const loading = useAppSelector(state => state.global.loading);
@@ -31,12 +42,12 @@ export default function ResearchScreen() {
           style={styles.gradientBottom}
         />
       </View>
-      <View style={styles.backgroundImageContainer}>
-        <Image source={require('../../assets/images/logo-light.png')} style={styles.backgroundImage} />
+      <View style={styles.logoContainer}>
+        <Image source={require('../../assets/images/logo-light.png')} style={width < 500 ? styles.logo : styles.logoTablet} />
       </View>
 
 
-      <ScrollView style={styles.content}>
+      <ScrollView style={width < 500 ? styles.content : styles.contentTablet}>
         <View style={styles.headerContainer}>
           <ThemedText style={styles.headerDescription}>
             Enter your watch's make and model below to get detailed information about your timepiece.
@@ -65,8 +76,8 @@ export default function ResearchScreen() {
           <View style={styles.resultsContainer}>
             <ThemedText style={styles.title}>{modelDetails.name}</ThemedText>
             {modelDetails.reference && <ThemedText style={styles.details}>Reference: {modelDetails.reference}</ThemedText>}
-            <ThemedText style={styles.details}>{modelDetails.price}</ThemedText>
-            <ThemedText style={styles.details}>{modelDetails.productionYear}</ThemedText>
+            <ThemedText style={styles.details}>Price: {modelDetails.price}</ThemedText>
+            <ThemedText style={styles.details}>Production: {modelDetails.productionYear}</ThemedText>
             <ThemedText style={styles.details}>{modelDetails.details}</ThemedText>
             <TouchableOpacity onPress={() => Linking.openURL(modelDetails.link)}>
               <Text style={styles.link}>{modelDetails.link}</Text>
@@ -83,10 +94,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
-    paddingTop: 70
+    paddingTop: 24
   },
   content: {
-    paddingTop: 220
+    paddingTop: 220,
+    maxWidth: 600,
+    margin: "auto"
+  },
+  contentTablet: {
+    paddingTop: 480,
+    maxWidth: 600,
+    margin: "auto"
   },
   headerContainer: {
     padding: 20,
@@ -132,20 +150,20 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 500,
   },
-  backgroundImageContainer: {
+  logoContainer: {
     position: 'absolute',
     opacity: 0.8,
     width: "100%",
     top: 0,
-    padding: 36,
-
   },
-  backgroundImage: {
+  logo: {
     height: 300
+  },
+  logoTablet: {
+    height: 500
   },
   searchContainer: {
     flexDirection: 'row',
-    margin: 12,
     padding: 20,
     borderRadius: 15,
     shadowColor: "#000",
@@ -191,6 +209,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 8,
   },
+
   title: {
     fontSize: 28,
     fontWeight: 'bold',

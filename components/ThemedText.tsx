@@ -20,7 +20,6 @@ export function ThemedText({
   return (
     <Text
       style={[
-        { color },
         styles.text,
         type === 'default' ? styles.default : undefined,
         type === 'title' ? styles.title : undefined,
@@ -38,6 +37,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "AvenirNext-Regular",
     fontWeight: 500,
+    color: '#F1F1F1'
   },
   default: {
     fontSize: 16,

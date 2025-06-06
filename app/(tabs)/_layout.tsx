@@ -10,20 +10,20 @@ const TabLayout = () => {
 
   const { validated } = usePurchases()
 
-  if (!validated) return <Redirect href="/subscription" />
+  //if (!validated) return <Redirect href="/subscription" />
 
   return (
     <Tabs
       screenOptions={{
         tabBarShowLabel: false,
         headerShown: false,
-        headerStyle: { backgroundColor:  Colors.dark.background, height: 70 },
+        headerStyle: { backgroundColor:  Colors.dark.background },
         tabBarStyle: {
           backgroundColor: "black",
-          height: 70,
+          height: 30,
           elevation: 10,
           shadowColor: '#000',
-          paddingTop: 6,
+          paddingTop: 12,
           shadowOffset: {
             width: 0,
             height: -2,

@@ -1,12 +1,11 @@
 import React from 'react';
-import {StyleSheet, View, ScrollView, Image, useColorScheme} from 'react-native';
+import {StyleSheet, View, ScrollView, Image, useColorScheme, useWindowDimensions} from 'react-native';
 import {ThemedText} from '@/components/ThemedText';
 import {LinearGradient} from "expo-linear-gradient";
 
 export default function AboutScreen() {
 
-  const colorScheme = useColorScheme()
-
+  const { width } = useWindowDimensions()
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -22,7 +21,7 @@ export default function AboutScreen() {
       </View>
 
       <ScrollView style={styles.content}>
-        <Image source={require('../../assets/images/logo-light.png')} style={styles.logo} />
+        <Image source={require('../../assets/images/logo-light.png')} style={width < 500 ? styles.logo : styles.logoTablet} />
         <ThemedText style={styles.description}>
           Welcome to Authentime, your trusted companion in watch authentication.
           Our advanced AI technology helps you verify the authenticity of luxury
@@ -74,11 +73,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    paddingTop: 70,
     backgroundColor: 'black',
   },
   content: {
-    padding: 20
+    paddingHorizontal: 20
   },
   imageContainer: {
     width: '100%',
@@ -106,7 +104,10 @@ const styles = StyleSheet.create({
   logo: {
     width: "100%",
     height: 215,
-    padding: 16,
+  },
+  logoTablet: {
+    width: "100%",
+    height: 580,
 
   },
   title: {

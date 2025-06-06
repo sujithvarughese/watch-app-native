@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import {StyleSheet, useWindowDimensions, View} from "react-native";
 import ImageUploadForm from "@/components/ImageUploadForm";
 import {Image} from "expo-image";
 import React from "react";
@@ -6,8 +6,9 @@ import {LinearGradient} from "expo-linear-gradient";
 
 
 export default function HomeScreen() {
+  const { width } = useWindowDimensions()
   return (
-    <View style={styles.container}>
+    <View style={width < 500 ? styles.container : styles.containerTablet}>
       <View style={styles.imageContainer}>
         <Image source={require('../../assets/images/subscription.jpeg')} style={styles.image}/>
         <LinearGradient
@@ -19,8 +20,8 @@ export default function HomeScreen() {
           style={styles.gradientBottom}
         />
       </View>
-      <View style={styles.backgroundImageContainer}>
-        <Image source={require('../../assets/images/logo-light.png')} style={styles.backgroundImage} />
+      <View style={styles.logoContainer}>
+        <Image source={require('../../assets/images/logo-light.png')} style={width < 500 ? styles.logo : styles.logoTablet} />
       </View>
       <ImageUploadForm />
     </View>
@@ -32,7 +33,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'black',
     alignItems: 'center',
-    paddingTop: 70
+    paddingTop: 40
+  },
+  containerTablet: {
+    flex: 1,
+    backgroundColor: 'black',
+    alignItems: 'center',
+    paddingTop: 300
   },
   imageContainer: {
     width: '100%',
@@ -56,16 +63,18 @@ const styles = StyleSheet.create({
     bottom: 0,
     height: 500,
   },
-  backgroundImageContainer: {
+  logoContainer: {
     position: 'absolute',
     opacity: 0.8,
     width: "100%",
     top: 0,
-    padding: 36,
 
   },
-  backgroundImage: {
+  logo: {
     height: 300
+  },
+  logoTablet: {
+    height: 500
   },
   footerContainer: {
     alignItems: 'center',
