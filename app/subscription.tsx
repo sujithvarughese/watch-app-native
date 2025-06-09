@@ -7,10 +7,11 @@ import {PurchasesPackage} from "react-native-purchases";
 import {usePurchases} from "@/context/PurchasesContext";
 import {Image} from "expo-image";
 import {ThemedText} from "@/components/ThemedText";
+import {useRouter} from "expo-router";
 
 export default function SubscriptionScreen() {
 
-  const { currentOffering, purchasePackage, validateUser } = usePurchases()
+  const { currentOffering, purchasePackage, validateUser, validated } = usePurchases()
   const [loading, setLoading] = useState(false);
   const [restoring, setRestoring] = useState(false);
   const [packages, setPackages] = useState<PurchasesPackage[]>([]);
@@ -19,6 +20,13 @@ export default function SubscriptionScreen() {
     const offerings = currentOffering?.availablePackages
     setPackages(offerings ?? [])
   }, []);
+
+  const router = useRouter()
+  useEffect(() => {
+    if (validated) {
+      router.replace("/(tabs)")
+    }
+  }, [validated]);
 
   const handleSubscribe = async (pkg: PurchasesPackage) => {
     setLoading(true);

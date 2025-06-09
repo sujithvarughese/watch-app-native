@@ -1,6 +1,6 @@
 import { Stack } from "expo-router";
 import {Provider} from "react-redux";
-import {SafeAreaView, useColorScheme} from "react-native";
+import {SafeAreaView} from "react-native";
 import {store} from "@/store/store";
 import PurchasesProvider from "@/context/PurchasesProvider";
 

@@ -1,16 +1,11 @@
 import {StyleSheet} from "react-native";
-import {Redirect, Tabs} from "expo-router";
+import {Tabs} from "expo-router";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
-import {usePurchases} from "@/context/PurchasesContext";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import {Colors} from "@/constants/Colors";
 
 const TabLayout = () => {
-
-  const { validated } = usePurchases()
-
-  if (!validated) return <Redirect href="/subscription" />
 
   return (
     <Tabs
