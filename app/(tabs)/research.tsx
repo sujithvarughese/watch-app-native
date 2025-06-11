@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     paddingTop: 24
   },
   content: {
-    paddingTop: 220,
+    paddingTop: 180,
     maxWidth: 600,
     margin: "auto"
   },
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     top: 0,
   },
   logo: {
-    height: 300
+    height: 200
   },
   logoTablet: {
     height: 500

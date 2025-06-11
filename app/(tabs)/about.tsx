@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: "100%",
-    height: 215,
+    height: 200,
   },
   logoTablet: {
     width: "100%",

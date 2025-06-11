@@ -68,10 +68,9 @@ const styles = StyleSheet.create({
     opacity: 0.8,
     width: "100%",
     top: 0,
-
   },
   logo: {
-    height: 300
+    height: 200
   },
   logoTablet: {
     height: 500

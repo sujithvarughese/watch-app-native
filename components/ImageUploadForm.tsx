@@ -63,7 +63,8 @@ export default function ImageUploadForm() {
           {'  '}- Band or Bracelet{'\n'}
           {'  '}- Clasp or Buckle{'\n'}
           {'  '}- Caseback{'\n'}
-          {'  '}- Side Case Profile
+          {'  '}- Side Case Profile{'\n'}
+          The more detailed the images you upload, the more accurate the results will be.
         </ThemedText>
       </View>
 
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
   },
   instructionsContainer: {
     position: 'absolute',
-    top: 190,
+    top: 140,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 12,
     padding: 16,

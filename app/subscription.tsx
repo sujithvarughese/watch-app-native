@@ -1,4 +1,4 @@
-import {StyleSheet, View, TouchableOpacity, Alert, ActivityIndicator,} from "react-native";
+import {StyleSheet, View, TouchableOpacity, Alert, ActivityIndicator, Text,} from "react-native";
 import {LinearGradient} from 'expo-linear-gradient';
 import React, {useState, useEffect} from "react";
 import * as Haptics from "expo-haptics";
@@ -80,9 +80,20 @@ export default function SubscriptionScreen() {
 
       <View style={styles.heading}>
         <ThemedText style={styles.title}>Authentime</ThemedText>
-        <ThemedText style={styles.subtitle}>Try free for 7 days, then {packages[1]?.product.priceString}/year.</ThemedText>
+        <ThemedText style={styles.subtitle}>Try free for 7 days, then <Text
+          style={styles.strikethrough}>$19.99/year.</Text></ThemedText>
+
+        <View style={styles.offerBadge}>
+          <Text style={styles.offerText}>Limited Time Introductory Offer</Text>
+          <Text style={styles.offerPrice}>{packages[1]?.product.priceString}/year</Text>
+        </View>
+
+
+
         <ThemedText style={styles.description}>Get unlimited watch authentications with our highly trained AI models.</ThemedText>
       </View>
+
+
 
       <View style={styles.featureList}>
         <ThemedText style={styles.featureItem}>🔍 AI-Powered Watch Authentications</ThemedText>
@@ -124,6 +135,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     alignItems: 'center',
   },
+  strikethrough: {
+    textDecorationLine: 'line-through',
+    color: 'white',
+  },
   imageContainer: {
     width: '100%',
     position: 'absolute',
@@ -159,11 +174,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   subtitle: {
-    fontSize: 32,
+    fontSize: 24,
     fontWeight: 600,
     color: 'white',
     textAlign: 'center',
-    lineHeight: 36,
+    lineHeight: 32,
   },
   description: {
     fontSize: 16,
@@ -174,18 +189,17 @@ const styles = StyleSheet.create({
   },
   featureList: {
     width: '100%',
-    marginBottom: 70,
+    marginBottom: 20,
     paddingHorizontal: 36
   },
   featureItem: {
     color: 'white',
     fontSize: 16,
-    marginBottom: 15,
+    marginBottom: 12,
     fontWeight: '600',
   },
   plansContainer: {
     width: '100%',
-    marginBottom: 28,
     alignItems: 'center',
   },
   planButton: {
@@ -229,4 +243,26 @@ const styles = StyleSheet.create({
     color: '#007AFF',
     fontSize: 16,
   },
+  offerBadge: {
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    alignItems: 'center',
+    gap: 4,
+    backdropFilter: 'blur(14px)',
+    paddingHorizontal: 12,
+    paddingVertical: 12,
+    borderRadius: 16,
+    alignSelf: 'center',
+  },
+  offerText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
+    lineHeight: 24,
+    textAlign: 'center',
+  },
+  offerPrice: {
+    color: 'gold',
+    fontWeight: 'bold',
+    fontSize: 24,
+  }
 });
