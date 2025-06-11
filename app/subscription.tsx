@@ -97,11 +97,11 @@ export default function SubscriptionScreen() {
 
       <View style={styles.featureList}>
         <ThemedText style={styles.featureItem}>🔍 AI-Powered Watch Authentications</ThemedText>
-        <ThemedText style={styles.featureItem}>👨‍💻 Expert-level analysis in seconds</ThemedText>
+        <ThemedText style={styles.featureItem}>🕵️‍♂️ Expert-level analysis in seconds</ThemedText>
         <ThemedText style={styles.featureItem}>📊 Detailed Authenticity Reports</ThemedText>
-        <ThemedText style={styles.featureItem}>🕵️‍♂️ Counterfeit Detection Alerts</ThemedText>
         <ThemedText style={styles.featureItem}>🕰️ Watch Database Access</ThemedText>
         <ThemedText style={styles.featureItem}>📱 Access on all devices</ThemedText>
+        <ThemedText style={styles.featureItem}>✨ New features added regularly</ThemedText>
       </View>
 
       <View style={styles.plansContainer}>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     height: 500,
   },
   heading: {
-    marginVertical: 24,
+    marginVertical: 16,
     marginHorizontal: 30,
     gap: 24,
   },
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
-    marginBottom: 12,
+
     textAlign: 'center',
   },
   subtitle: {

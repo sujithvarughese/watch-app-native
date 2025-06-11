@@ -2,7 +2,7 @@
   "expo": {
     "name": "Authentime",
     "slug": "watch-app-native",
-    "version": "1.0.11",
+    "version": "1.0.12",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "watchappnative",
@@ -62,6 +62,12 @@
       "eas": {
         "projectId": "68bd456f-da58-4f07-b189-48a2f0d5fad6"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/68bd456f-da58-4f07-b189-48a2f0d5fad6"
     }
   }
 }

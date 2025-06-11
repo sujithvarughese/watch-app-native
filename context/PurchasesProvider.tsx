@@ -84,7 +84,7 @@ const PurchasesProvider: React.FC<PurchasesProviderProps> = ({ children }) => {
   const validateUser = async () => {
     if (!initialized || !customerInfo) return;
     const isPro = customerInfo.entitlements.active["Pro"] !== undefined;
-    setValidated(true);
+    setValidated(isPro);
   };
 
   useEffect(() => {
