@@ -13,6 +13,7 @@ export default function RootLayout() {
           <Stack>
             <Stack.Screen name="(tabs)" options={{ headerShown: false, title: "" }} />
             <Stack.Screen name="results" options={{ title: "", headerStyle: { backgroundColor: '#000' } }} />
+            <Stack.Screen name="results-trial" options={{ title: "", headerStyle: { backgroundColor: '#000' } }} />
             <Stack.Screen name="subscription" options={{ headerShown: false, title: "" }} />
             <Stack.Screen name="+not-found" />
           </Stack>

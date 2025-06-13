@@ -9,11 +9,13 @@ import IconButton from "@/components/IconButton";
 import CircleButton from "@/components/CircleButton";
 import {ThemedText} from "@/components/ThemedText";
 import Loading from "@/components/Loading";
+import {usePurchases} from "@/context/PurchasesContext";
 
 const PlaceholderImage = require('@/assets/images/icon.png');
 
 
 export default function ImageUploadForm() {
+  const { validated } = usePurchases()
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(state => state.global.loading)
@@ -41,6 +43,10 @@ export default function ImageUploadForm() {
 
   const handleSubmit = async () => {
     await dispatch(fetchWatchDetails(selectedImages))
+    if (!validated) {
+      router.navigate('/results-trial')
+      return
+    }
     router.navigate('/results')
   }
 

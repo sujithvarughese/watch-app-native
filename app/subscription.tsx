@@ -81,11 +81,12 @@ export default function SubscriptionScreen() {
       <View style={styles.heading}>
         <ThemedText style={styles.title}>Authentime</ThemedText>
         <ThemedText style={styles.subtitle}>Try free for 7 days, then <Text
-          style={styles.strikethrough}>$19.99/year.</Text></ThemedText>
+          style={styles.strikethrough}>$29.99.</Text></ThemedText>
 
         <View style={styles.offerBadge}>
           <Text style={styles.offerText}>Limited Time Introductory Offer</Text>
-          <Text style={styles.offerPrice}>{packages[1]?.product.priceString}/year</Text>
+          <Text style={styles.offerPrice}>Lifetime Access for $14.99</Text>
+          {/*<Text style={styles.offerPrice}>Lifetime access for {packages[2]?.product.priceString}</Text>*/}
         </View>
 
 
@@ -112,7 +113,8 @@ export default function SubscriptionScreen() {
         >
           {loading ? <ActivityIndicator size="large" color="white" style={{ width: 80 }} /> : <ThemedText style={styles.planTitle}>START FOR FREE 🙌</ThemedText>}
         </TouchableOpacity>
-        <ThemedText style={styles.trial}>7 days free, then {packages[1]?.product.priceString} per year. (billed annually)</ThemedText>
+        <ThemedText style={styles.trial}>7 days free, then one-time charge of $14.99</ThemedText>
+        {/*<ThemedText style={styles.trial}>7 days free, then {packages[1]?.product.priceString} per year. (billed annually)</ThemedText>*/}
         <TouchableOpacity
           style={styles.restoreButton}
           onPress={handleRestore}
@@ -134,6 +136,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: 'black',
     alignItems: 'center',
+    paddingVertical: 16
   },
   strikethrough: {
     textDecorationLine: 'line-through',
@@ -162,7 +165,7 @@ const styles = StyleSheet.create({
     height: 500,
   },
   heading: {
-    marginVertical: 16,
+
     marginHorizontal: 30,
     gap: 24,
   },
@@ -189,13 +192,12 @@ const styles = StyleSheet.create({
   },
   featureList: {
     width: '100%',
-    marginBottom: 20,
-    paddingHorizontal: 36
+    paddingHorizontal: 36,
+    gap: 12
   },
   featureItem: {
     color: 'white',
     fontSize: 16,
-    marginBottom: 12,
     fontWeight: '600',
   },
   plansContainer: {
@@ -228,7 +230,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
-    marginBottom: 5,
   },
   loader: {
     marginTop: 10,
