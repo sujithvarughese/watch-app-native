@@ -35,7 +35,7 @@ const ResultsTrialScreen = () => {
           <View>
             <PaywallOverlay/>
             {results.slice(1).map(result => (
-              <View key={result.category} style={[styles.barContainer, styles.blur]}>
+              <View key={result.category} style={styles.barContainer}>
                 <ThemedText style={styles.cardTitle}>
                   {result.category}
 
@@ -50,9 +50,9 @@ const ResultsTrialScreen = () => {
                     }]}
                   />
                 </View>
-                <BlurView intensity={100} tint="default" experimentalBlurMethod="dimezisBlurView" style={styles.blur}>
+                <View style={styles.blur}>
                   <ThemedText style={[styles.cardComment, styles.blur]}>{result.comments}</ThemedText>
-                </BlurView>
+                </View>
               </View>
             ))}
           </View>
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: '#fff',
     letterSpacing: 0.5,
+    textAlign: 'center',
   },
   details: {
     fontSize: 16,
@@ -114,11 +115,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowRadius: 3,
     elevation: 2,
-  },
-  blur: {
-    overflow: 'hidden',
-    opacity: 0.5,
-    backgroundColor: 'rgba(0, 0, 0, 0.9)',
   },
   barLabel: {
     marginBottom: 8,
@@ -153,6 +149,14 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginTop: 8,
     fontWeight: 500,
+  },
+  blur: {
+    overflow: 'hidden',
+    opacity: 0.3,
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    textShadowColor: 'rgba(0, 0, 0, 0.9)',
+    textShadowOffset: {width: 0, height: 0},
+    textShadowRadius: 1,
   },
 });
 
