@@ -1,6 +1,7 @@
 import {ImageSourcePropType, StyleSheet, View} from 'react-native';
 import { Image } from 'expo-image';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+
 import Button from "@/components/Button";
 
 type Props = {
@@ -22,7 +23,7 @@ export default function ImageViewer({ imgSource, selectedImages, setSelectedImag
       {selectedImages?.map((image, index) =>
         <View key={index}>
           <Button style={styles.icon} onPress={() => removeImage(index)}>
-            <MaterialCommunityIcons name="image-remove" size={24} color="red" />
+            <MaterialIcons name="delete-forever" size={32} color="red" />
           </Button>
           <Image source={image} style={styles.image} />
         </View>

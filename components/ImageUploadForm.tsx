@@ -10,7 +10,8 @@ import CircleButton from "@/components/CircleButton";
 import {ThemedText} from "@/components/ThemedText";
 import Loading from "@/components/Loading";
 import {usePurchases} from "@/context/PurchasesContext";
-
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 const PlaceholderImage = require('@/assets/images/icon.png');
 
 
@@ -80,9 +81,9 @@ export default function ImageUploadForm() {
       </View>
       <View style={styles.optionsContainer}>
         <View style={styles.optionsRow}>
-          {!loading && !!selectedImages.length && <IconButton icon="refresh" label="Reset" onPress={handleReset} />}
+          {!loading && !!selectedImages.length && <IconButton icon={<FontAwesome5 name="undo-alt" size={28} color="white" />} label="Reset" onPress={handleReset} />}
           {!loading && <CircleButton onPress={pickImageAsync} />}
-          {!loading && !!selectedImages.length && <IconButton icon="image-search" label="Submit" onPress={handleSubmit} />}
+          {!loading && !!selectedImages.length && <IconButton icon={<FontAwesome6 name="searchengin" size={28} color="white" />} label="Submit" onPress={handleSubmit} />}
         </View>
       </View>
       {loading && <View style={styles.loadingContainer}><Loading /></View>}

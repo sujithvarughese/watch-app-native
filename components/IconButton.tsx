@@ -3,7 +3,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import {ThemedText} from "@/components/ThemedText";
 
 type Props = TouchableOpacityProps & {
-  icon: keyof typeof MaterialIcons.glyphMap;
+  icon: React.ReactNode;
   label: string;
   onPress: () => void;
 };
@@ -11,7 +11,7 @@ type Props = TouchableOpacityProps & {
 export default function IconButton({ icon, label, onPress }: Props) {
   return (
     <TouchableOpacity style={styles.iconButton} onPress={onPress}>
-      <MaterialIcons name={icon} size={24} color="#fff" />
+      {icon}
       <ThemedText style={styles.iconButtonLabel}>{label}</ThemedText>
     </TouchableOpacity>
   );
