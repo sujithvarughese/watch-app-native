@@ -25,7 +25,7 @@ const PaywallOverlay = () => {
   const router = useRouter()
   useEffect(() => {
     if (validated) {
-      router.replace("/(tabs)")
+      router.replace("/results")
     }
   }, [validated]);
 
@@ -39,6 +39,7 @@ const PaywallOverlay = () => {
       await purchasePackage(pkg);
       validateUser()
       Alert.alert("Success", "Subscription successful!");
+      router.replace("/results")
 
     } catch (error) {
       Alert.alert("Error", "Subscription failed. Please try again.");
@@ -78,8 +79,7 @@ const PaywallOverlay = () => {
             <ThemedText style={styles.title}>Unlock your full report.</ThemedText>
             <View style={styles.offerBadge}>
               <Text style={styles.offerText}>Limited Time Introductory Offer</Text>
-              <Text style={styles.offerPrice}>Lifetime Access for $14.99</Text>
-              {/*<Text style={styles.offerPrice}>Lifetime access for {packages[2]?.product.priceString}</Text>*/}
+              <Text style={styles.offerPrice}>Lifetime access for {packages[2]?.product.priceString}</Text>
             </View>
             <ThemedText style={styles.description}>Get unlimited watch authentications with our highly trained AI models.</ThemedText>
           </View>
@@ -97,12 +97,12 @@ const PaywallOverlay = () => {
           <View style={styles.plansContainer}>
             <TouchableOpacity
               style={styles.planButton}
-              onPress={() => handleSubscribe(packages[1])}
+              onPress={() => handleSubscribe(packages[2])}
               disabled={loading}
             >
               {loading ? <ActivityIndicator color="white" style={{ width: 80 }} /> : <ThemedText style={styles.planTitle}>SUBSCRIBE NOW 🙌</ThemedText>}
             </TouchableOpacity>
-            {/*<ThemedText style={styles.trial}>7 days free, then {packages[1]?.product.priceString} per year. (billed annually)</ThemedText>*/}
+            <ThemedText style={styles.trial}>{packages[2]?.product.priceString} will be charged one-time.</ThemedText>
             <TouchableOpacity
               style={styles.restoreButton}
               onPress={handleRestore}
