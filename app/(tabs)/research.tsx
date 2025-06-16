@@ -79,9 +79,14 @@ export default function ResearchScreen() {
             <ThemedText style={styles.details}>Price: {modelDetails.price}</ThemedText>
             <ThemedText style={styles.details}>Production: {modelDetails.productionYear}</ThemedText>
             <ThemedText style={styles.details}>{modelDetails.details}</ThemedText>
-            <TouchableOpacity onPress={() => Linking.openURL(modelDetails.link)}>
-              <Text style={styles.link}>{modelDetails.link}</Text>
-            </TouchableOpacity>
+            <View style={styles.links}>
+              <TouchableOpacity onPress={() => Linking.openURL(modelDetails.link)}>
+                <Text style={styles.link}>More Info</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => Linking.openURL(modelDetails.purchase)}>
+                <Text style={styles.link}>Purchase</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         )}
       </ScrollView>
@@ -209,7 +214,11 @@ const styles = StyleSheet.create({
     shadowRadius: 4.65,
     elevation: 8,
   },
+  links: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
 
+  },
   title: {
     fontSize: 28,
     fontWeight: 'bold',

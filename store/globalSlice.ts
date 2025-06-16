@@ -16,10 +16,11 @@ export type WatchDetails = {
 export type ModelDetails = {
   name: string,
   details: string,
-  link: string,
   productionYear: string,
   reference: string,
-  price: string
+  price: string,
+  link: string,
+  purchase: string
 }
 
 export type Props = {
@@ -99,6 +100,8 @@ export const fetchWatchDetails = createAsyncThunk('global/fetchWatchDetails', as
 });
 
 export const fetchModelDetails = createAsyncThunk('global/fetchModelDetails', async (payload: string, { getState }) => {
+  const searchQuery = payload.split(" ").join("+")
+  const searchUrl = `https://www.authenticwatches.com/search-results.html?q=${searchQuery}`
   try {
     const res = await openai.post("", {
       model: "gpt-4.1-mini",
@@ -117,7 +120,8 @@ export const fetchModelDetails = createAsyncThunk('global/fetchModelDetails', as
         },
       ],
     });
-    return JSON.parse(res?.data?.choices[0].message.content);
+    const results = JSON.parse(res?.data?.choices[0].message.content);
+    return { ...results, purchase: searchUrl }
   } catch (error) {
     throw new Error(error instanceof Error ? error.message : String(error));
   }
