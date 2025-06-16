@@ -100,7 +100,7 @@ const PaywallOverlay = () => {
               onPress={() => handleSubscribe(packages[2])}
               disabled={loading}
             >
-              {loading ? <ActivityIndicator color="white" style={{ width: 80 }} /> : <ThemedText style={styles.planTitle}>SUBSCRIBE NOW 🙌</ThemedText>}
+              {loading ? <ActivityIndicator color="white" style={{ height: 28 }} /> : <ThemedText style={styles.planTitle}>GET FULL REPORT 🙌</ThemedText>}
             </TouchableOpacity>
             <ThemedText style={styles.trial}>{packages[2]?.product.priceString} will be charged one-time.</ThemedText>
             <TouchableOpacity
@@ -190,8 +190,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   planButton: {
-    padding: 24,
-    height: 80,
+    padding: 20,
     width: '80%',
     backgroundColor: '#34C759',
     borderRadius: 20,
