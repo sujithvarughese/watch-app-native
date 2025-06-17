@@ -35,7 +35,7 @@ const TabLayout = () => {
         options={{
           title: '',
           tabBarIcon: ({ color, focused}) => (
-            <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={color} size={28} />
+            <Ionicons name={focused ? 'home-sharp' : 'home-outline'} color={focused ? "#ffd33d" : color} size={28} />
           )
       }}
       />
@@ -44,7 +44,7 @@ const TabLayout = () => {
         options={{
           title: '',
           tabBarIcon: ({ color, focused}) => (
-            <MaterialCommunityIcons name='database-search' size={28} color={color} />
+            <MaterialCommunityIcons name='database-search' size={28} color={focused ? "#ffd33d" : color} />
           )
         }}
       />
@@ -53,7 +53,7 @@ const TabLayout = () => {
         options={{
           title: '',
           tabBarIcon: ({ color, focused}) => (
-            <Entypo name="info-with-circle" size={28} color={color} />
+            <Entypo name="info-with-circle" size={28} color={focused ? "#ffd33d" : color} />
           )
       }}
       />

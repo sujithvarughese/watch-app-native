@@ -101,8 +101,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 12,
     padding: 16,
-    marginHorizontal: 20,
-    marginVertical: 16,
+    marginVertical: 8,
     width: '90%',
   },
   instructionsHeader: {
