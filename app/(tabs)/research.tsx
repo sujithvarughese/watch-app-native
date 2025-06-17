@@ -76,9 +76,10 @@ export default function ResearchScreen() {
           <View style={styles.resultsContainer}>
             <ThemedText style={styles.title}>{modelDetails.name}</ThemedText>
             {modelDetails.reference && <ThemedText style={styles.details}>Reference: {modelDetails.reference}</ThemedText>}
-            <ThemedText style={styles.details}>Price: {modelDetails.price}</ThemedText>
-            <ThemedText style={styles.details}>Production: {modelDetails.productionYear}</ThemedText>
+            {modelDetails.price && <ThemedText style={styles.details}>Price: {modelDetails.price}</ThemedText>}
+            {modelDetails.productionYear && <ThemedText style={styles.details}>Production: {modelDetails.productionYear}</ThemedText>}
             <ThemedText style={styles.details}>{modelDetails.details}</ThemedText>
+            {modelDetails.link &&
             <View style={styles.links}>
               <TouchableOpacity onPress={() => Linking.openURL(modelDetails.link)}>
                 <Text style={styles.link}>More Info</Text>
@@ -87,6 +88,7 @@ export default function ResearchScreen() {
                 <Text style={styles.link}>Purchase</Text>
               </TouchableOpacity>
             </View>
+            }
           </View>
         )}
       </ScrollView>

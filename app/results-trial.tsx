@@ -3,18 +3,21 @@ import {ScrollView, StyleSheet, Text, View} from "react-native";
 import {useAppSelector} from "@/store/hooks";
 import {ThemedText} from "@/components/ThemedText";
 import {LinearGradient} from 'expo-linear-gradient';
-import {BlurView} from "expo-blur";
 import PaywallOverlay from "@/components/PaywallOverlay";
 
 const ResultsTrialScreen = () => {
 
   const watchDetails = useAppSelector(state => state.global.watchDetails)
-  const { name, details, results } = watchDetails || { name: '', details: '', results: []}
+  const { name, details, productionYear, reference, price, results } = watchDetails || { name: '', details: '', productionYear: '', reference: '', price: '', results: []}
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{name}</Text>
       <ThemedText style={styles.details}>{details}</ThemedText>
+      <ThemedText style={styles.infoText}>Production Year: {productionYear}</ThemedText>
+      <ThemedText style={styles.infoText}>Reference: {reference}</ThemedText>
+      <ThemedText style={styles.infoText}>Price: ${price}</ThemedText>
+
       {results?.length > 0 && (
         <View style={styles.chartContainer}>
           <View key={results[0].category} style={styles.barContainer}>
@@ -74,6 +77,15 @@ const getColor = (rating: number) => {
 }
 
 const styles = StyleSheet.create({
+  infoContainer: {
+
+  },
+  infoText: {
+    fontSize: 14,
+    color: '#e0e0e0',
+    marginBottom: 8,
+    fontWeight: '500',
+  },
   container: {
     flex: 1,
     padding: 16,
@@ -152,7 +164,7 @@ const styles = StyleSheet.create({
   },
   blur: {
     overflow: 'hidden',
-    opacity: 0.3,
+    opacity: 0.2,
     backgroundColor: 'rgba(0, 0, 0, 0.9)',
     textShadowColor: 'rgba(0, 0, 0, 0.9)',
     textShadowOffset: {width: 0, height: 0},

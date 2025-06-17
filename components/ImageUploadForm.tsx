@@ -12,8 +12,6 @@ import Loading from "@/components/Loading";
 import {usePurchases} from "@/context/PurchasesContext";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-const PlaceholderImage = require('@/assets/images/icon.png');
-
 
 export default function ImageUploadForm() {
   const { validated } = usePurchases()
@@ -77,7 +75,7 @@ export default function ImageUploadForm() {
 
 
       <View style={styles.imageContainer}>
-        <ImageViewer imgSource={PlaceholderImage} selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
+        <ImageViewer selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
       </View>
       <View style={styles.optionsContainer}>
         <View style={styles.optionsRow}>

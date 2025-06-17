@@ -23,7 +23,7 @@ export default function Loading() {
         }
         return prev + 1;
       });
-    }, 100);
+    }, 85);
 
     return () => {
       clearInterval(interval);

@@ -6,7 +6,7 @@ import {ThemedText} from "@/components/ThemedText";
 const ResultsScreen = () => {
 
   const watchDetails = useAppSelector(state => state.global.watchDetails)
-  const { name, details, results } = watchDetails || { name: '', details: '', results: []}
+  const { name, details, results, productionYear, reference, price } = watchDetails || { name: '', details: '', results: []}
 
   return (
     <ScrollView style={styles.container}>

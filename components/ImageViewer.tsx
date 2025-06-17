@@ -1,17 +1,15 @@
-import {ImageSourcePropType, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import { Image } from 'expo-image';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import Button from "@/components/Button";
 
 type Props = {
-  imgSource: ImageSourcePropType;
   selectedImages?: string[];
   setSelectedImages?: (images: string[]) => void;
 };
 
-export default function ImageViewer({ imgSource, selectedImages, setSelectedImages }: Props) {
-  const imageSource = selectedImages?.length ? { uri: selectedImages } : imgSource;
+export default function ImageViewer({ selectedImages, setSelectedImages }: Props) {
 
   const removeImage = (indexToRemove: number) => {
     const images = selectedImages!.filter((image, index) => index !== indexToRemove)

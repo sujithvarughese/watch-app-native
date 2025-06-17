@@ -10,6 +10,9 @@ export type Category = {
 export type WatchDetails = {
   name: string,
   details: string,
+  productionYear: string,
+  reference: string,
+  price: string,
   results: Category[]
 }
 
