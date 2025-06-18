@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
   iconButton: {
     justifyContent: 'center',
     alignItems: 'center',
+    width: 56
   },
   iconButtonLabel: {
     color: '#fff',
