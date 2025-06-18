@@ -13,7 +13,8 @@ export type WatchDetails = {
   productionYear: string,
   reference: string,
   price: string,
-  results: Category[]
+  results: Category[],
+  analysis: string
 }
 
 export type ModelDetails = {

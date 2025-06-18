@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, View, Text, Pressable, Alert, TouchableOpacity, ActivityIndicator} from "react-native";
-import {router, useRouter} from "expo-router";
+import {StyleSheet, View, Text, Alert, TouchableOpacity, ActivityIndicator} from "react-native";
+import {useRouter} from "expo-router";
 import {usePurchases} from "@/context/PurchasesContext";
 import {PurchasesPackage} from "react-native-purchases";
 import * as Haptics from "expo-haptics";
 import {restorePurchases} from "@/utilities/revenuecat";
-import {LinearGradient} from "expo-linear-gradient";
-import {Image} from "expo-image";
 import {ThemedText} from "@/components/ThemedText";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
@@ -40,7 +38,6 @@ const PaywallOverlay = () => {
       validateUser()
       Alert.alert("Success", "Subscription successful!");
       router.replace("/results")
-
     } catch (error) {
       Alert.alert("Error", "Subscription failed. Please try again.");
     } finally {
@@ -55,6 +52,7 @@ const PaywallOverlay = () => {
       if (purchases) {
         validateUser()
         Alert.alert("Success", "Purchases restored successfully!");
+        router.replace("/results")
       } else {
         Alert.alert("Info", "No purchases to restore");
       }
@@ -64,10 +62,6 @@ const PaywallOverlay = () => {
       setRestoring(false);
     }
   };
-
-  const handleClick = () => {
-    router.navigate("/subscription")
-  }
 
   return (
     <View style={styles.overlay}>
@@ -102,7 +96,7 @@ const PaywallOverlay = () => {
             >
               {loading ? <ActivityIndicator color="white" style={{ height: 28 }} /> : <ThemedText style={styles.planTitle}>GET FULL REPORT 🙌</ThemedText>}
             </TouchableOpacity>
-            <ThemedText style={styles.trial}>{packages[2]?.product.priceString} will be charged one-time.</ThemedText>
+            <ThemedText style={styles.trial}>You will be billed a one-time charge of {packages[2]?.product.priceString} for full access and unlimited authentication reports.</ThemedText>
             <TouchableOpacity
               style={styles.restoreButton}
               onPress={handleRestore}
@@ -114,7 +108,6 @@ const PaywallOverlay = () => {
             </TouchableOpacity>
           </View>
           <FontAwesome name="lock" size={160} color="black" />
-
         </View>
       </View>
 
@@ -131,8 +124,8 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   container: {
-    margin: 36,
-    width: "85%",
+    margin: 56,
+    width: "90%",
     borderRadius: 22,
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.1)',
@@ -141,6 +134,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 5,
+    height: "90%",
   },
   content: {
     alignItems: "center",
@@ -174,6 +168,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontWeight: '500',
+    padding: 16,
   },
   featureList: {
     width: '100%',
@@ -218,9 +213,13 @@ const styles = StyleSheet.create({
   },
   trial: {
     color: 'white',
+    fontSize: 14,
+    padding: 16,
+    textAlign: 'center',
   },
   restoreButton: {
-    padding: 15,
+    margin: 24,
+    marginBottom: 150
   },
   restoreText: {
     color: '#007AFF',
@@ -247,7 +246,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 24,
     textAlign: 'center',
-  }
+  },
 });
 
 export default PaywallOverlay;

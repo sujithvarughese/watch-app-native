@@ -6,12 +6,16 @@ import {ThemedText} from "@/components/ThemedText";
 const ResultsScreen = () => {
 
   const watchDetails = useAppSelector(state => state.global.watchDetails)
-  const { name, details, results, productionYear, reference, price } = watchDetails || { name: '', details: '', results: []}
+  const { name, details, results, productionYear, reference, price, analysis } = watchDetails || { name: '', details: '', results: [], analysis: ""}
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.title}>{name}</Text>
       <ThemedText style={styles.details}>{details}</ThemedText>
+      <ThemedText style={styles.infoText}>Production Year: {productionYear}</ThemedText>
+      <ThemedText style={styles.infoText}>Reference: {reference}</ThemedText>
+      <ThemedText style={styles.infoText}>Price: ${price}</ThemedText>
+
       {results?.length > 0 && (
       <View style={styles.chartContainer}>
         {results.map(result => (
@@ -32,6 +36,13 @@ const ResultsScreen = () => {
         </View>
         ))}
       </View>
+      )}
+
+      {analysis && (
+        <View style={styles.analysisContainer}>
+          <Text style={styles.analysisTitle}>Analysis</Text>
+          <ThemedText style={styles.analysisText}>{analysis}</ThemedText>
+        </View>
       )}
     </ScrollView>
   );
@@ -72,6 +83,12 @@ const styles = StyleSheet.create({
     color: '#e0e0e0',
     fontWeight: 500,
     lineHeight: 24,
+  },
+  infoText: {
+    fontSize: 14,
+    color: '#e0e0e0',
+    marginBottom: 8,
+    fontWeight: '500',
   },
   chartContainer: {
     marginVertical: 25,
@@ -123,6 +140,24 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     marginTop: 8,
     fontWeight: 500
+  },
+  analysisContainer: {
+    marginTop: 10,
+    padding: 15,
+    backgroundColor: '#1a1a1a',
+    borderRadius: 12,
+  },
+  analysisTitle: {
+    fontSize: 20,
+    color: '#fff',
+    fontWeight: '700',
+    marginBottom: 10,
+  },
+  analysisText: {
+    fontSize: 16,
+    color: '#e0e0e0',
+    lineHeight: 24,
+    fontWeight: '500',
   },
 });
 

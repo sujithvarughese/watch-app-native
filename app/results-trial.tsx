@@ -8,7 +8,7 @@ import PaywallOverlay from "@/components/PaywallOverlay";
 const ResultsTrialScreen = () => {
 
   const watchDetails = useAppSelector(state => state.global.watchDetails)
-  const { name, details, productionYear, reference, price, results } = watchDetails || { name: '', details: '', productionYear: '', reference: '', price: '', results: []}
+  const { name, details, productionYear, reference, price, results, analysis } = watchDetails || { name: '', details: '', productionYear: '', reference: '', price: '', results: [], analysis: ""}
 
   return (
     <ScrollView style={styles.container}>
@@ -58,6 +58,12 @@ const ResultsTrialScreen = () => {
                 </View>
               </View>
             ))}
+            {analysis && (
+              <View style={[styles.barContainer, {marginTop: 20}]}>
+                <ThemedText style={styles.cardTitle}>Analysis</ThemedText>
+                <ThemedText style={[styles.cardComment, styles.blur]}>{analysis}</ThemedText>
+              </View>
+            )}
           </View>
 
         </View>
@@ -77,15 +83,6 @@ const getColor = (rating: number) => {
 }
 
 const styles = StyleSheet.create({
-  infoContainer: {
-
-  },
-  infoText: {
-    fontSize: 14,
-    color: '#e0e0e0',
-    marginBottom: 8,
-    fontWeight: '500',
-  },
   container: {
     flex: 1,
     padding: 16,
@@ -110,6 +107,12 @@ const styles = StyleSheet.create({
     color: '#e0e0e0',
     fontWeight: 500,
     lineHeight: 24,
+  },
+  infoText: {
+    fontSize: 14,
+    color: '#e0e0e0',
+    marginBottom: 8,
+    fontWeight: '500',
   },
   chartContainer: {
     marginVertical: 25,
@@ -164,7 +167,7 @@ const styles = StyleSheet.create({
   },
   blur: {
     overflow: 'hidden',
-    opacity: 0.2,
+    opacity: 0.1,
     backgroundColor: 'rgba(0, 0, 0, 0.9)',
     textShadowColor: 'rgba(0, 0, 0, 0.9)',
     textShadowOffset: {width: 0, height: 0},
