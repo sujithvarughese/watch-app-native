@@ -3,10 +3,13 @@ import ImageUploadForm from "@/components/ImageUploadForm";
 import {Image} from "expo-image";
 import React from "react";
 import {LinearGradient} from "expo-linear-gradient";
+import Camera from "@/components/Camera";
+import {useAppSelector} from "@/store/hooks";
 
 
 export default function HomeScreen() {
   const { width } = useWindowDimensions()
+
   return (
     <View style={width < 500 ? styles.container : styles.containerTablet}>
       <View style={styles.imageContainer}>

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Authentime",
     "slug": "watch-app-native",
-    "version": "1.0.14",
+    "version": "1.0.15",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "watchappnative",
@@ -51,6 +51,12 @@
           "ios": {
             "deploymentTarget": "15.1"
           }
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Authentime to access your camera"
         }
       ]
     ],

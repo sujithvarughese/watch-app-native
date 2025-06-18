@@ -3,7 +3,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import ImageViewer from '@/components/ImageViewer';
 import {useAppDispatch, useAppSelector} from "@/store/hooks";
-import {fetchWatchDetails} from "@/store/globalSlice";
+import {fetchWatchDetails, toggleCamera} from "@/store/globalSlice";
 import {router} from "expo-router";
 import IconButton from "@/components/IconButton";
 import CircleButton from "@/components/CircleButton";
@@ -12,12 +12,14 @@ import Loading from "@/components/Loading";
 import {usePurchases} from "@/context/PurchasesContext";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import Camera from "@/components/Camera";
 
 export default function ImageUploadForm() {
   const { validated } = usePurchases()
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const dispatch = useAppDispatch();
   const loading = useAppSelector(state => state.global.loading)
+  const cameraShown = useAppSelector(state => state.global.cameraShown)
 
   const pickImageAsync = async () => {
     if (selectedImages?.length >= 6) {
@@ -35,8 +37,6 @@ export default function ImageUploadForm() {
       } else {
         setSelectedImages([...selectedImages, ...images])
       }
-    } else {
-      alert('You did not select any image.');
     }
   };
 
@@ -80,12 +80,13 @@ export default function ImageUploadForm() {
 
       <View style={styles.optionsContainer}>
         <View style={styles.optionsRow}>
-          {!loading && !!selectedImages.length && <IconButton icon={<FontAwesome5 name="undo-alt" size={28} color="white" />} label="Reset" onPress={handleReset} />}
-          {!loading && <CircleButton onPress={pickImageAsync} />}
+          {!loading && !!selectedImages.length && <IconButton icon={<FontAwesome5 name="undo-alt" size={24} color="white" />} label="Reset" onPress={handleReset} />}
+          {!loading && <CircleButton onPress={() => dispatch(toggleCamera())} />}
           {!loading && !!selectedImages.length && <IconButton icon={<FontAwesome6 name="searchengin" size={28} color="white" />} label="Submit" onPress={handleSubmit} />}
         </View>
       </View>
       {loading && <View style={styles.loadingContainer}><Loading /></View>}
+      {cameraShown && <Camera pickImageAsync={pickImageAsync} selectedImages={selectedImages} setSelectedImages={setSelectedImages}  />}
     </View>
   );
 }

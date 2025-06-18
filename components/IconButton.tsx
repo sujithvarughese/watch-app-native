@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   iconButtonLabel: {
     color: '#fff',
     marginTop: 12,
-    fontWeight: 500
+    fontWeight: 500,
+    fontSize: 14
   },
 });

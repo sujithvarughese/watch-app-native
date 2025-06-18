@@ -29,6 +29,7 @@ export type ModelDetails = {
 
 export type Props = {
   loading: boolean,
+  cameraShown: boolean,
   images: string[],
   watchDetails: WatchDetails | null,
   modelDetails: ModelDetails | null,
@@ -36,6 +37,7 @@ export type Props = {
 
 const initialState: Props = {
   loading: false,
+  cameraShown: false,
   images: [],
   watchDetails: null,
   modelDetails: null,
@@ -45,7 +47,9 @@ const globalSlice = createSlice({
   name: 'global',
   initialState,
   reducers: {
-
+    toggleCamera: (state) => {
+      state.cameraShown = !state.cameraShown
+    }
   },
   extraReducers: builder => {
     builder.addCase(fetchWatchDetails.fulfilled, (state, action) => {
@@ -133,4 +137,4 @@ export const fetchModelDetails = createAsyncThunk('global/fetchModelDetails', as
 
 
 export default globalSlice.reducer;
-export const {} = globalSlice.actions;
+export const { toggleCamera } = globalSlice.actions;
