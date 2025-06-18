@@ -43,12 +43,12 @@ const styles = StyleSheet.create({
   image: {
     width: 180,
     height: 180,
-    borderRadius: 18,
+    borderRadius: 8,
   },
   icon: {
     position: 'absolute',
-    top: 10,
-    right: 10,
+    top: 8,
+    right: 8,
     zIndex: 1,
   }
 });

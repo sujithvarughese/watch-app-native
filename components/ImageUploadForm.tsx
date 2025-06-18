@@ -77,6 +77,7 @@ export default function ImageUploadForm() {
       <View style={styles.imageContainer}>
         <ImageViewer selectedImages={selectedImages} setSelectedImages={setSelectedImages} />
       </View>
+
       <View style={styles.optionsContainer}>
         <View style={styles.optionsRow}>
           {!loading && !!selectedImages.length && <IconButton icon={<FontAwesome5 name="undo-alt" size={28} color="white" />} label="Reset" onPress={handleReset} />}
