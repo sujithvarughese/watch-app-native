@@ -12,6 +12,9 @@ const PaywallOverlay = () => {
 
   const { currentOffering, purchasePackage, validateUser, validated } = usePurchases()
   const [loading, setLoading] = useState(false);
+  const [lifetimeLoading, setLifetimeLoading] = useState(false);
+  const [annualLoading, setAnnualLoading] = useState(false);
+  const [monthlyLoading, setMonthlyLoading] = useState(false);
   const [restoring, setRestoring] = useState(false);
   const [packages, setPackages] = useState<PurchasesPackage[]>([]);
 
@@ -21,13 +24,15 @@ const PaywallOverlay = () => {
   }, []);
 
   const router = useRouter()
-  useEffect(() => {
-    if (validated) {
-      router.replace("/results")
-    }
-  }, [validated]);
 
   const handleSubscribe = async (pkg: PurchasesPackage) => {
+    if (pkg.packageType === "LIFETIME") {
+      setLifetimeLoading(true);
+    } else if (pkg.packageType === "ANNUAL") {
+      setAnnualLoading(true);
+    } else if (pkg.packageType === "MONTHLY") {
+      setMonthlyLoading(true);
+    }
     setLoading(true);
     try {
       await Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -41,6 +46,13 @@ const PaywallOverlay = () => {
     } catch (error) {
       Alert.alert("Error", "Subscription failed. Please try again.");
     } finally {
+      if (pkg.packageType === "LIFETIME") {
+        setLifetimeLoading(false);
+      } else if (pkg.packageType === "ANNUAL") {
+        setAnnualLoading(false);
+      } else if (pkg.packageType === "MONTHLY") {
+        setMonthlyLoading(false);
+      }
       setLoading(false);
     }
   };
@@ -94,9 +106,44 @@ const PaywallOverlay = () => {
               onPress={() => handleSubscribe(packages[2])}
               disabled={loading}
             >
-              {loading ? <ActivityIndicator color="white" style={{ height: 28 }} /> : <ThemedText style={styles.planTitle}>GET FULL REPORT 🙌</ThemedText>}
+              {lifetimeLoading ? <ActivityIndicator color="white" size="large" /> :
+                <View style={styles.plans}>
+                  <ThemedText style={styles.planTitle}>GET FULL REPORT 🙌</ThemedText>
+                  <ThemedText style={styles.planSubtitle}>Lifetime Access</ThemedText>
+                </View>
+              }
             </TouchableOpacity>
             <ThemedText style={styles.trial}>You will be billed a one-time charge of {packages[2]?.product.priceString} for full access and unlimited authentication reports.</ThemedText>
+
+            <ThemedText style={styles.planOptionsTitle}>More Purchase Options</ThemedText>
+            <View style={styles.planOptions}>
+              <TouchableOpacity
+                style={styles.planButtons}
+                onPress={() => handleSubscribe(packages[1])}
+                disabled={loading}
+              >
+                {annualLoading ? <ActivityIndicator color="white" /> :
+                  <View style={styles.plans}>
+                    <ThemedText style={styles.planTitles}>{packages[1]?.packageType}</ThemedText>
+                    <ThemedText style={styles.planSubtitles}>{packages[1]?.product.priceString}/yr</ThemedText>
+                  </View>
+                }
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.planButtons}
+                onPress={() => handleSubscribe(packages[0])}
+                disabled={loading}
+              >
+                {monthlyLoading ? <ActivityIndicator color="white" /> :
+                  <View style={styles.plans}>
+                    <ThemedText style={styles.planTitles}>{packages[0]?.packageType}</ThemedText>
+                    <ThemedText style={styles.planSubtitles}>{packages[0]?.product.priceString}/mo</ThemedText>
+                  </View>
+                }
+              </TouchableOpacity>
+            </View>
+            <ThemedText style={styles.trial}>You will be billed on an annual or monthly basis, depending on the subscription you select for full access and unlimited authentication reports.</ThemedText>
+
             <TouchableOpacity
               style={styles.restoreButton}
               onPress={handleRestore}
@@ -110,7 +157,6 @@ const PaywallOverlay = () => {
           <FontAwesome name="lock" size={160} color="black" />
         </View>
       </View>
-
     </View>
   );
 };
@@ -134,7 +180,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 5,
-    height: "90%",
   },
   content: {
     alignItems: "center",
@@ -151,7 +196,7 @@ const styles = StyleSheet.create({
     gap: 24,
   },
   title: {
-    fontSize: 20,
+    fontSize: 22,
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center',
@@ -185,11 +230,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   planButton: {
-    padding: 20,
+    padding: 16,
     width: '80%',
     backgroundColor: '#34C759',
     borderRadius: 20,
-    margin: 20,
+    marginTop: 20,
     alignItems: 'center',
     shadowColor: '#007AFF',
     shadowOffset: {width: 0, height: 4},
@@ -199,12 +244,53 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.1)',
   },
+  planButtons: {
+    padding: 12,
+    width: '40%',
+    backgroundColor: 'dodgerblue',
+    borderRadius: 20,
+    marginHorizontal: 12,
+    marginTop: 8,
+    marginBottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#007AFF',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 5,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.1)',
+  },
+  plans: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  planOptionsTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+    textAlign: 'center',
+    paddingTop: 16,
+  },
   selectedButton: {
     borderWidth: 1,
     borderColor: "gold",
   },
   planTitle: {
     fontSize: 18,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  planSubtitle: {
+    fontWeight: 600,
+    textTransform: 'uppercase',
+  },
+  planSubtitles: {
+    fontSize: 14,
+  },
+  planTitles: {
+    fontSize: 14,
     fontWeight: 'bold',
     color: 'white',
   },
@@ -218,12 +304,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   restoreButton: {
-    margin: 24,
-    marginBottom: 150
+    margin: 16,
   },
   restoreText: {
     color: '#007AFF',
     fontSize: 16,
+  },
+  planOptions: {
+    flexDirection: 'row',
   },
   offerBadge: {
     backgroundColor: 'rgba(0, 0, 0, 0.2)',

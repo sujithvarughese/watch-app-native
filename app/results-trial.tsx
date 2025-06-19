@@ -16,7 +16,7 @@ const ResultsTrialScreen = () => {
       <ThemedText style={styles.details}>{details}</ThemedText>
       {productionYear && <ThemedText style={styles.infoText}>Production Year: {productionYear}</ThemedText>}
       {reference && <ThemedText style={styles.infoText}>Reference: {reference}</ThemedText>}
-      {price && <ThemedText style={styles.infoText}>Price: ${price}</ThemedText>}
+      {price && <ThemedText style={styles.infoText}>Price: {price}</ThemedText>}
 
       {results?.length > 0 && (
         <View style={styles.chartContainer}>

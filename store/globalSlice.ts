@@ -85,7 +85,7 @@ export const fetchWatchDetails = createAsyncThunk('global/fetchWatchDetails', as
     const res = await openai.post("", {
       model: "gpt-4.1-mini",
       response_format: { type: "json_object" },
-      temperature: 0.2,
+      temperature: 0.0001,
       messages: [
         {
           role: "system",
@@ -114,7 +114,7 @@ export const fetchModelDetails = createAsyncThunk('global/fetchModelDetails', as
     const res = await openai.post("", {
       model: "gpt-4.1-mini",
       response_format: { type: "json_object" },
-      temperature: 0.2,
+      temperature: 0.0001,
       messages: [
         {
           role: "system",

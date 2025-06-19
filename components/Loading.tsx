@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, StyleSheet, Animated} from 'react-native';
 import {ThemedText} from "@/components/ThemedText";
 
+
 export default function Loading() {
   const [progress, setProgress] = useState(0);
   const [progressWidth] = useState(new Animated.Value(0));
@@ -9,7 +10,7 @@ export default function Loading() {
   useEffect(() => {
     const animation = Animated.timing(progressWidth, {
       toValue: 100,
-      duration: 10000,
+      duration: 12000,
       useNativeDriver: false,
     });
 
@@ -42,7 +43,7 @@ export default function Loading() {
     if (progress <= 40) return 'Processing images...';
     if (progress <= 60) return 'Analyzing watch details...';
     if (progress < 100) return 'Generating results...';
-    if (progress === 100) return 'Analysis complete!';
+    if (progress === 100) return 'Analysis complete! Generating Report...';
     return '';
   };
 
